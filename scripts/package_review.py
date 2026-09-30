@@ -17,7 +17,7 @@ def main():
     browser = json.loads((ROOT/"outputs/verification/browser.json").read_text())
     if reproduction["status"] != "passed" or browser["page_errors"]:
         raise RuntimeError("Verification must pass before packaging")
-    files = [ROOT/name for name in [".gitignore","README.md","app.py","config.json","requirements.txt"]]
+    files = [ROOT/name for name in [".gitignore",".gitattributes","README.md","app.py","config.json","requirements.txt"]]
     folders = ["src","sql","tests","scripts","protocols","docs","archives",
                "outputs/sales","outputs/robustness","outputs/benchmark_analysis","outputs/verification"]
     extensions = {".py",".sql",".cjs",".json",".sha256",".md",".txt",".csv",".parquet",".png",".html",".xml",".log",".zip"}
