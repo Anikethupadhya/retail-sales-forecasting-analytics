@@ -1,0 +1,20 @@
+{
+  "experiment": "retrospective_robustness_v1",
+  "frozen_before_execution": true,
+  "forecast_start_dates": ["2011-01-01", "2011-03-01", "2011-05-01", "2011-07-01", "2011-09-01", "2011-11-01"],
+  "date_semantics": "Training ends the preceding calendar day. Forecast_start is horizon day 1; predict 28 consecutive calendar days.",
+  "horizon_days": 28,
+  "training": "Expanding histories beginning 2009-12-01; independently fit each origin without within-horizon updates.",
+  "selection_cutoff_exclusive": "2011-01-01",
+  "eligibility": {"product_count": 20, "min_initial_days": 365, "max_first_sale_offset_days": 90, "min_active_day_fraction": 0.25, "min_recent_active_day_fraction": 0.30, "recent_days": 90},
+  "ranking": "Descending positive units before selection cutoff, then product_id ascending. Accept fewer than 20 eligible products; do not relax thresholds. Fixed cohort across all windows.",
+  "models": ["seasonal_naive", "weekday_mean_4w", "weekday_mean_8w", "hw_weekly"],
+  "hw_weekly": {"trend": null, "seasonal": "add", "seasonal_periods": 7, "initialization_method": "estimated", "optimized": true, "use_brute": false},
+  "baselines": {"seasonal_naive": "Repeat the last observed 7 calendar days four times.", "weekday_mean_4w": "Average each matching weekday over the preceding 28 calendar days; repeat the seven fixed averages over the horizon.", "weekday_mean_8w": "Average each matching weekday over the preceding 56 calendar days; repeat the seven fixed averages over the horizon."},
+  "nonnegative_clipping": true,
+  "failure_policy": "Model exception, nonfinite forecast or optimizer failure uses last-week seasonal-naive fallback; retain warnings, failed-fit status and clipping counts. Baseline calculation errors abort instead of concealing implementation errors.",
+  "metrics": {"mae": "mean(abs(prediction-actual))", "pooled_wape": "100*sum(abs(prediction-actual))/sum(actual)", "mean_product_wape": "Arithmetic mean of defined per-product WAPEs", "signed_bias": "mean(prediction-actual); positive means overprediction", "percentage_bias": "100*sum(prediction-actual)/sum(actual)", "overall": "Pool all product-days across all six windows; never average window WAPE percentages.", "zero_denominators": "Undefined WAPE and percentage bias are null; zero baseline WAPE gives undefined relative reduction.", "product_wins": "Compare product absolute errors against each named baseline for products with positive actual total. Strictly lower beyond 1e-9 is a win; within 1e-9 is a tie. Report losses and undefined separately.", "error_reduction_contribution": "Baseline absolute error minus model absolute error, retaining negative values."},
+  "tie_absolute_error_tolerance": 1e-9,
+  "spike_rule_for_existing_benchmark": "Daily actual units strictly above the product's 99th percentile daily units in training through 2011-11-10. Inclusive calendar grid; numpy/pandas linear percentile interpolation. Keep every spike in primary metrics.",
+  "limitations": ["hw_weekly was selected using later-2011 validation; earlier windows are retrospective stress tests of that specification.", "September and November windows overlap existing evaluations. Results are not independent confirmation or a fresh untouched holdout.", "Compare methods within the same fixed cohort; cohort differences prevent attributing cross-experiment differences solely to models.", "Observed positive sales do not reveal actual inventory or lost demand. No additional models or date changes after inspecting outcomes."]
+}

@@ -1,0 +1,12 @@
+{
+  "url": "http://localhost:8501",
+  "screenshots": 4,
+  "checks": [
+    "All-merchandise scope and source coverage",
+    "Existing corrected benchmark charts and product/cohort scope",
+    "Robustness experiment, November period and changed product",
+    "Model comparison, period curves and signed product contributions",
+    "Rendered product error tables and spike chart"
+  ],
+  "page_errors": []
+}

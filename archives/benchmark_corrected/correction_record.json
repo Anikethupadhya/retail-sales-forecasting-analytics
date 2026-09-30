@@ -1,0 +1,29 @@
+{
+  "reason": "Workbook sheets overlap on 2010-12-01 through 2010-12-09. Exactly matching raw rows have 22523 matched occurrences in both sheets. Remove cross-sheet replicas using exact full-row fields and occurrence matching; retain within-sheet repetitions.",
+  "previous_selected_model": "hw_weekly",
+  "previous_selected_product_ids": [
+    "84077",
+    "21212",
+    "85123A",
+    "85099B",
+    "84879",
+    "17003",
+    "22197",
+    "21977",
+    "84991",
+    "15036",
+    "84755",
+    "84568",
+    "21213",
+    "20725",
+    "21232",
+    "22178",
+    "85099F",
+    "84992",
+    "21982",
+    "22386"
+  ],
+  "policy": "Preserve previously selected model family and all settings. Recompute training-only eligibility after ingestion correction. Do not select a different model from the already observed final test.",
+  "previous_results": "outputs/before_overlap_correction/",
+  "final_test_previously_observed": true
+}

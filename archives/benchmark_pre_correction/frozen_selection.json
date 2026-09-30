@@ -1,0 +1,20 @@
+{
+  "selected_model": "hw_weekly",
+  "selection_metric": "Pooled WAPE across all three validation windows and all selected products",
+  "validation_wape": 99.26160849398913,
+  "candidate_models": [
+    "seasonal_naive",
+    "ses",
+    "hw_weekly",
+    "hw_damped_weekly"
+  ],
+  "candidate_settings": {
+    "ses": "Estimated initialization; optimized smoothing level",
+    "hw_weekly": "Additive weekly seasonality, no trend; optimized coefficients; use_brute=False",
+    "hw_damped_weekly": "Additive weekly seasonality and damped additive trend; optimized coefficients; use_brute=False"
+  },
+  "nonnegative_clipping": true,
+  "failure_policy": "Any exception, nonfinite forecast or optimizer failure falls back to seasonal naive, recorded in model_events.json. Other warnings are retained with predictions.",
+  "config_sha256": "aa06771361730bf88492584c8a4a088fc0c39b2b7ad7425be88f02f66423cca0",
+  "frozen_before_final_test": true
+}

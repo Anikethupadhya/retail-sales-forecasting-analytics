@@ -1,0 +1,21 @@
+product_id,description,scenario_origin,assumption_type,lead_days,days_covered,scenario_inventory_units,forecast_lead_time_units,scenario_shortfall_units,replenishment_flag
+22197,POPCORN HOLDER,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,7,7,492.0,1947.5529190431143,1455.5529190431143,True
+85099B,JUMBO BAG RED RETROSPOT,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,8,8,1093.0,1529.3009534963576,436.3009534963576,True
+22386,JUMBO BAG PINK POLKADOT,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,8,8,341.0,673.9048471553482,332.9048471553482,True
+21977,PACK OF 60 PINK PAISLEY CAKE CASES,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,11,11,419.0,695.9786589893299,276.9786589893299,True
+84568,GIRLS ALPHABET IRON ON PATCHES ,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,10,10,298.0,517.5411731236646,219.54117312366463,True
+85099F,JUMBO BAG STRAWBERRY,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,9,9,265.0,414.9965032995509,149.9965032995509,True
+21212,PACK OF 72 RETROSPOT CAKE CASES,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,8,8,719.0,780.1304698355639,61.13046983556387,True
+15036,ASSORTED COLOURS SILK FAN,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,5,5,350.0,91.8646738445946,0.0,False
+17003,BROCADE RING PURSE ,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,6,6,708.0,437.69119428087083,0.0,False
+20725,LUNCH BAG RED RETROSPOT,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,7,7,482.0,393.5140080753959,0.0,False
+21213,PACK OF 72 SKULL CAKE CASES,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,9,9,395.0,392.7751455753798,0.0,False
+21232,STRAWBERRY CERAMIC TRINKET BOX,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,10,10,472.0,250.7156436561424,0.0,False
+21982,PACK OF 12 SUKI TISSUES ,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,5,5,342.0,168.0034144966592,0.0,False
+22178,VICTORIAN GLASS HANGING T-LIGHT,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,6,6,449.0,430.7022734755176,0.0,False
+84077,WORLD WAR 2 GLIDERS ASSTD DESIGNS,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,9,9,1223.0,1109.0454629165808,0.0,False
+84755,COLOUR GLASS T-LIGHT HOLDER HANGING,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,11,11,413.0,217.71554041049635,0.0,False
+84879,ASSORTED COLOUR BIRD ORNAMENT,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,5,5,932.0,745.0913364102843,0.0,False
+84991,60 TEATIME FAIRY CAKE CASES,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,6,6,406.0,314.8832945494117,0.0,False
+84992,72 SWEETHEART FAIRY CAKE CASES,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,7,7,352.0,269.63490628526944,0.0,False
+85123A,WHITE HANGING HEART T-LIGHT HOLDER,2011-11-10,SIMULATED: seven days initial mean sales times deterministic factor,10,10,939.0,795.73044047306,0.0,False

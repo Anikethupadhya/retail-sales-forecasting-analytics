@@ -1,0 +1,18 @@
+Reading and auditing both official workbook sheets
+Reconciled sales aggregates; analysing immutable corrected benchmark
+Forecasting 2011-01-01 through 2011-01-28
+Forecasting 2011-03-01 through 2011-03-28
+Forecasting 2011-05-01 through 2011-05-28
+Forecasting 2011-07-01 through 2011-07-28
+Forecasting 2011-09-01 through 2011-09-28
+Forecasting 2011-11-01 through 2011-11-28
+          model       mae       wape  signed_bias  percentage_bias  overprediction_units  underprediction_units  absolute_error_sum  actual_units  observations  mean_product_wape
+      hw_weekly 68.451573 104.519041     3.777792         5.768329         121345.333213          108651.951711       229997.284924      220053.0          3360         138.183596
+ seasonal_naive 72.313988 110.416581   -22.353869       -34.132232          83933.000000          159042.000000       242975.000000      220053.0          3360         110.176766
+weekday_mean_4w 67.822619 103.558688    -8.004167       -12.221601         100495.000000          127389.000000       227884.000000      220053.0          3360         112.249753
+weekday_mean_8w 68.705060 104.906091     0.534375         0.815940         116322.250000          114526.750000       230849.000000      220053.0          3360         113.780342
+    model        baseline  model_wape  baseline_wape  relative_wape_reduction_pct  error_reduction_units  wins  losses  ties  undefined  comparable_products  win_pct
+hw_weekly  seasonal_naive  104.519041     110.416581                     5.341173           12977.715076     8      12     0          0                   20     40.0
+hw_weekly weekday_mean_4w  104.519041     103.558688                    -0.927351           -2113.284924    12       8     0          0                   20     60.0
+hw_weekly weekday_mean_8w  104.519041     104.906091                     0.368949             851.715076    12       8     0          0                   20     60.0
+Completed in 110.4s

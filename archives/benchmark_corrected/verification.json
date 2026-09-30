@@ -1,0 +1,50 @@
+{
+  "full_analysis_completed": true,
+  "pytest": {
+    "tests": "12",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "5.662"
+  },
+  "browser": {
+    "url": "http://localhost:8501",
+    "screenshots": 2,
+    "page_errors": []
+  },
+  "dashboard_controls_verified": [
+    "product selection",
+    "supplier delay 17 days",
+    "inventory 0 percent",
+    "inventory 200 percent",
+    "additional inventory 100000 units"
+  ],
+  "git_ignore_verified": [
+    "data/raw workbook and ZIP",
+    "data/processed",
+    "outputs/retail.duckdb",
+    ".venv"
+  ],
+  "source_sha256": {
+    "app.py": "b2d116c63c75ed00454e88498e3932891ffafdeebc27622764169ad02fcc26cd",
+    "config.json": "aa06771361730bf88492584c8a4a088fc0c39b2b7ad7425be88f02f66423cca0",
+    "requirements.txt": "24b2e20a3a81d226d0423995051cd2b24fdb4516b7392906b58c1ab448cf87bc",
+    "src\\__init__.py": "c5ce23be377f73bbbffc75419547e18e72719375479002ae3606506c4013ffe1",
+    "src\\common.py": "0ea558ef734f4619e632b80ae4389bb43305e9b801554ddcafe5b8998ad18f10",
+    "src\\data.py": "27db606044ecb275b7d09b5ee0731604a0dc8b0c0f2bc6b9189d57c493e0dd75",
+    "src\\forecast.py": "2e5cc0ad52e00cbf7f1c8ab72e67623f3b3a2f27b4d648ca0f330e51cc993bff",
+    "src\\inventory.py": "91760a6b37129b7199aeee27c3ac5512812e71dc859b35e99e1d2b8b3e8cd68c",
+    "src\\metrics.py": "e189140b5bd2390f9ac2a9581b8620722821f1bf3db9a04e85f36ff60ed774a1",
+    "src\\pipeline.py": "597225f278db7e3183e30bf432cd7dd14bc49c4c1c905769f43fdb41250cb897",
+    "src\\report.py": "a89a058a723bf5afd055bd55e77fe905936d5cb7752437f991f2f94f33f3149d",
+    "sql\\forecast_performance.sql": "2536b3793cf636265664bbe0c0f1c2d8c7302401eab239f31ef5a7fba854d09c",
+    "sql\\inventory_scenario.sql": "f7975647f81b0036af503e29be4c04e53ef0097f907344a80e30257188caabc8",
+    "sql\\sales_summary.sql": "75c5e6052208ff353269fc9132e29724cc922ebfa2b299b8dc97a0c9a786cbc8"
+  },
+  "limitations": [
+    "Single historical holiday-period holdout",
+    "Corrected cross-sheet ingestion after original test observation; original model family and cohort preserved",
+    "Inventory and supplier assumptions simulated",
+    "Prophet deferred as optional extension"
+  ]
+}

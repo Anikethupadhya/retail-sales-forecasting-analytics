@@ -1,0 +1,17 @@
+{
+  "name": "Retail Demand Forecasting & Inventory Risk Analytics",
+  "workbook": "data/raw/online_retail_II.xlsx",
+  "source_url": "https://archive.ics.uci.edu/dataset/502/online+retail+ii",
+  "download_url": "https://archive.ics.uci.edu/static/public/502/online%2Bretail%2Bii.zip",
+  "horizon_days": 28,
+  "validation_windows": 3,
+  "product_count": 20,
+  "min_initial_days": 365,
+  "max_first_sale_offset_days": 90,
+  "min_active_day_fraction": 0.25,
+  "min_recent_active_day_fraction": 0.30,
+  "recent_days": 90,
+  "models": ["seasonal_naive", "ses", "hw_weekly", "hw_damped_weekly"],
+  "clip_forecasts_at_zero": true,
+  "exclude_final_calendar_day": true
+}

@@ -1,0 +1,136 @@
+{
+  "experiment": "retrospective_robustness_v1",
+  "protocol_sha256": "32277d60050ee557cc4a99617034c3963f738eea2d776f74c952308e0857801f",
+  "selection_cutoff_exclusive": "2011-01-01",
+  "selected_product_ids": [
+    "21212",
+    "85123A",
+    "84077",
+    "85099B",
+    "17003",
+    "84879",
+    "84991",
+    "22197",
+    "21977",
+    "21232",
+    "21213",
+    "21982",
+    "21980",
+    "84755",
+    "84347",
+    "84992",
+    "21984",
+    "20725",
+    "21981",
+    "15036"
+  ],
+  "criteria": {
+    "product_count": 20,
+    "min_initial_days": 365,
+    "max_first_sale_offset_days": 90,
+    "min_active_day_fraction": 0.25,
+    "min_recent_active_day_fraction": 0.3,
+    "recent_days": 90
+  },
+  "ranking": "Descending positive units before selection cutoff, then product_id ascending. Accept fewer than 20 eligible products; do not relax thresholds. Fixed cohort across all windows.",
+  "splits": [
+    {
+      "split": "2011-01-01",
+      "stage": "robustness",
+      "train_start": "2009-12-01",
+      "train_end": "2010-12-31",
+      "forecast_start": "2011-01-01",
+      "forecast_end": "2011-01-28",
+      "training_days": 396,
+      "horizon_days": 28
+    },
+    {
+      "split": "2011-03-01",
+      "stage": "robustness",
+      "train_start": "2009-12-01",
+      "train_end": "2011-02-28",
+      "forecast_start": "2011-03-01",
+      "forecast_end": "2011-03-28",
+      "training_days": 455,
+      "horizon_days": 28
+    },
+    {
+      "split": "2011-05-01",
+      "stage": "robustness",
+      "train_start": "2009-12-01",
+      "train_end": "2011-04-30",
+      "forecast_start": "2011-05-01",
+      "forecast_end": "2011-05-28",
+      "training_days": 516,
+      "horizon_days": 28
+    },
+    {
+      "split": "2011-07-01",
+      "stage": "robustness",
+      "train_start": "2009-12-01",
+      "train_end": "2011-06-30",
+      "forecast_start": "2011-07-01",
+      "forecast_end": "2011-07-28",
+      "training_days": 577,
+      "horizon_days": 28
+    },
+    {
+      "split": "2011-09-01",
+      "stage": "robustness",
+      "train_start": "2009-12-01",
+      "train_end": "2011-08-31",
+      "forecast_start": "2011-09-01",
+      "forecast_end": "2011-09-28",
+      "training_days": 639,
+      "horizon_days": 28
+    },
+    {
+      "split": "2011-11-01",
+      "stage": "robustness",
+      "train_start": "2009-12-01",
+      "train_end": "2011-10-31",
+      "forecast_start": "2011-11-01",
+      "forecast_end": "2011-11-28",
+      "training_days": 700,
+      "horizon_days": 28
+    }
+  ],
+  "cohort_comparison": {
+    "shared": [
+      "15036",
+      "17003",
+      "20725",
+      "21212",
+      "21213",
+      "21232",
+      "21977",
+      "21982",
+      "22197",
+      "84077",
+      "84755",
+      "84879",
+      "84991",
+      "84992",
+      "85099B",
+      "85123A"
+    ],
+    "robustness_only": [
+      "21980",
+      "21981",
+      "21984",
+      "84347"
+    ],
+    "existing_benchmark_only": [
+      "22178",
+      "22386",
+      "84568",
+      "85099F"
+    ]
+  },
+  "limitations": [
+    "hw_weekly was selected using later-2011 validation; earlier windows are retrospective stress tests of that specification.",
+    "September and November windows overlap existing evaluations. Results are not independent confirmation or a fresh untouched holdout.",
+    "Compare methods within the same fixed cohort; cohort differences prevent attributing cross-experiment differences solely to models.",
+    "Observed positive sales do not reveal actual inventory or lost demand. No additional models or date changes after inspecting outcomes."
+  ]
+}

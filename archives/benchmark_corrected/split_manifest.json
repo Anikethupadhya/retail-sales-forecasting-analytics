@@ -1,0 +1,76 @@
+{
+  "selection_cutoff_exclusive": "2011-08-19",
+  "selected_product_ids": [
+    "84077",
+    "21212",
+    "85123A",
+    "85099B",
+    "84879",
+    "17003",
+    "22197",
+    "21977",
+    "84991",
+    "15036",
+    "84755",
+    "84568",
+    "21213",
+    "20725",
+    "21232",
+    "22178",
+    "85099F",
+    "84992",
+    "21982",
+    "22386"
+  ],
+  "ranking": "Descending initial positive units; product_id ascending breaks ties",
+  "criteria": {
+    "product_count": 20,
+    "min_initial_days": 365,
+    "max_first_sale_offset_days": 90,
+    "min_active_day_fraction": 0.25,
+    "min_recent_active_day_fraction": 0.3,
+    "recent_days": 90
+  },
+  "splits": [
+    {
+      "split": "validation_1",
+      "stage": "validation",
+      "train_start": "2009-12-01",
+      "train_end": "2011-08-18",
+      "forecast_start": "2011-08-19",
+      "forecast_end": "2011-09-15",
+      "training_days": 626,
+      "horizon_days": 28
+    },
+    {
+      "split": "validation_2",
+      "stage": "validation",
+      "train_start": "2009-12-01",
+      "train_end": "2011-09-15",
+      "forecast_start": "2011-09-16",
+      "forecast_end": "2011-10-13",
+      "training_days": 654,
+      "horizon_days": 28
+    },
+    {
+      "split": "validation_3",
+      "stage": "validation",
+      "train_start": "2009-12-01",
+      "train_end": "2011-10-13",
+      "forecast_start": "2011-10-14",
+      "forecast_end": "2011-11-10",
+      "training_days": 682,
+      "horizon_days": 28
+    },
+    {
+      "split": "final_test",
+      "stage": "test",
+      "train_start": "2009-12-01",
+      "train_end": "2011-11-10",
+      "forecast_start": "2011-11-11",
+      "forecast_end": "2011-12-08",
+      "training_days": 710,
+      "horizon_days": 28
+    }
+  ]
+}

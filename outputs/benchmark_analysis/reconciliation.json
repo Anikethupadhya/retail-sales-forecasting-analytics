@@ -1,0 +1,9 @@
+{
+  "archived_metrics_reconciled": true,
+  "absolute_tolerance": 1e-08,
+  "relative_tolerance": 1e-10,
+  "net_absolute_error_reduction_units": 15635.417514893976,
+  "source": "archives/benchmark_corrected/test_predictions.csv",
+  "spike_rule": "Actual units strictly exceed product training-history 99th percentile, linear interpolation, through 2011-11-10. Zero days included. Spikes retained in every primary metric.",
+  "causality": "Patterns are observed; order/customer motives and promotion effects are not established by these aggregate outputs."
+}

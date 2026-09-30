@@ -1,0 +1,556 @@
+[
+  {
+    "split": "validation_1",
+    "product_id": "17003",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "21212",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "21212",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "21213",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "21213",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "21232",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "21232",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "21977",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "21982",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 12
+  },
+  {
+    "split": "validation_1",
+    "product_id": "84755",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "84755",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "84991",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "84991",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "84992",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "84992",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "85099F",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "85123A",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_1",
+    "product_id": "85123A",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "15036",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "15036",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "17003",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "21212",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "21212",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "21232",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "21232",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "21977",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "21982",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 12
+  },
+  {
+    "split": "validation_2",
+    "product_id": "22178",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "22178",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "84568",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "84755",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "84755",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "84991",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "84992",
+    "model": "ses",
+    "status": "nonconverged_baseline_fallback",
+    "warnings": [
+      "ConvergenceWarning: Optimization failed to converge. Check mle_retvals."
+    ],
+    "negative_predictions_clipped": 0
+  },
+  {
+    "split": "validation_2",
+    "product_id": "84992",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "84992",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "85099B",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "85123A",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_2",
+    "product_id": "85123A",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "15036",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "15036",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "17003",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "21212",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "21212",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "21213",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "21213",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "21232",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "21232",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "21977",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "84755",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "84755",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "84879",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "84879",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "84991",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "84991",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "84992",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "84992",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "85123A",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "validation_3",
+    "product_id": "85123A",
+    "model": "hw_damped_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "final_test",
+    "product_id": "15036",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "final_test",
+    "product_id": "17003",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "final_test",
+    "product_id": "21212",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "final_test",
+    "product_id": "21213",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "final_test",
+    "product_id": "21232",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "final_test",
+    "product_id": "21982",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 12
+  },
+  {
+    "split": "final_test",
+    "product_id": "84755",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "final_test",
+    "product_id": "84991",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "final_test",
+    "product_id": "84992",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "final_test",
+    "product_id": "85123A",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  }
+]

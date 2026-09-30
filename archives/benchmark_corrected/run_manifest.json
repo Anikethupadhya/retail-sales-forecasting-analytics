@@ -1,0 +1,18 @@
+{
+  "python": "3.14.3",
+  "packages": {
+    "pandas": "3.0.6",
+    "numpy": "2.5.3",
+    "duckdb": "1.5.6",
+    "statsmodels": "0.15.0",
+    "scipy": "1.18.1",
+    "plotly": "7.1.0",
+    "streamlit": "1.64.0",
+    "openpyxl": "3.1.5",
+    "pyarrow": "25.0.1"
+  },
+  "duration_seconds": 49.52,
+  "raw_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "config_sha256": "aa06771361730bf88492584c8a4a088fc0c39b2b7ad7425be88f02f66423cca0",
+  "completed": true
+}

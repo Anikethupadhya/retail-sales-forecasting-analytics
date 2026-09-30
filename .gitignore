@@ -1,0 +1,30 @@
+.venv/
+.repro-venv/
+.repro-workspace/
+__pycache__/
+.pytest_cache/
+data/raw/*
+!data/raw/.gitkeep
+data/processed/
+outputs/retail.duckdb*
+outputs/sales_analytics.duckdb*
+deliverables/
+outputs/returns_cancellations.csv.gz
+outputs/excluded_rows.csv.gz
+outputs/run.log
+.streamlit/secrets.toml
+*.tmp
+
+# Local credentials and generated scratch files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.DS_Store
+Thumbs.db
+
+# The immutable archives already preserve this historical output set.
+outputs/before_overlap_correction/

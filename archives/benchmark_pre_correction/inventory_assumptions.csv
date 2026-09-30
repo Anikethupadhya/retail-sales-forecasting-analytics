@@ -1,0 +1,21 @@
+product_id,base_lead_days,base_inventory_units,inventory_factor,initial_mean_daily_units,assumption_type
+15036,5,350.0,0.75,66.7444089456869,SIMULATED: seven days initial mean sales times deterministic factor
+17003,6,720.0,1.0,102.84504792332268,SIMULATED: seven days initial mean sales times deterministic factor
+20725,7,488.0,1.25,55.79073482428115,SIMULATED: seven days initial mean sales times deterministic factor
+21212,8,732.0,0.75,139.46805111821087,SIMULATED: seven days initial mean sales times deterministic factor
+21213,9,399.0,1.0,56.953674121405754,SIMULATED: seven days initial mean sales times deterministic factor
+21232,10,485.0,1.25,55.41054313099041,SIMULATED: seven days initial mean sales times deterministic factor
+21977,11,424.0,0.75,80.72204472843451,SIMULATED: seven days initial mean sales times deterministic factor
+21982,5,345.0,1.0,49.343450479233226,SIMULATED: seven days initial mean sales times deterministic factor
+22178,6,456.0,1.25,52.1038338658147,SIMULATED: seven days initial mean sales times deterministic factor
+22197,7,503.0,0.75,95.80670926517571,SIMULATED: seven days initial mean sales times deterministic factor
+22386,8,345.0,1.0,49.242811501597444,SIMULATED: seven days initial mean sales times deterministic factor
+84077,9,1276.0,1.25,145.79392971246006,SIMULATED: seven days initial mean sales times deterministic factor
+84568,10,299.0,0.75,56.960063897763575,SIMULATED: seven days initial mean sales times deterministic factor
+84755,11,416.0,1.0,59.41054313099041,SIMULATED: seven days initial mean sales times deterministic factor
+84879,5,954.0,1.25,108.98083067092652,SIMULATED: seven days initial mean sales times deterministic factor
+84991,6,411.0,0.75,78.22044728434504,SIMULATED: seven days initial mean sales times deterministic factor
+84992,7,355.0,1.0,50.72843450479233,SIMULATED: seven days initial mean sales times deterministic factor
+85099B,8,1113.0,1.25,127.22044728434504,SIMULATED: seven days initial mean sales times deterministic factor
+85099F,9,267.0,0.75,50.88817891373802,SIMULATED: seven days initial mean sales times deterministic factor
+85123A,10,960.0,1.0,137.15335463258785,SIMULATED: seven days initial mean sales times deterministic factor

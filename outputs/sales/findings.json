@@ -1,0 +1,26 @@
+{
+  "scope": "All cleaned merchandise; 2009-12-01 through 2011-12-08; all countries",
+  "findings": [
+    {
+      "id": "matched_growth",
+      "text": "January\u2013November 2011 positive-sales value changed by +2.90% versus the same months in 2010; units changed by -6.00%.",
+      "source": "outputs/sales/comparable_growth.csv",
+      "row": "year=2011",
+      "value": 2.896081910134423
+    },
+    {
+      "id": "value_leader",
+      "text": "22423 (REGENCY CAKESTAND 3 TIER) led positive-sales value at \u00a3330,757.09, accounting for 1.70% of the all-merchandise total.",
+      "source": "outputs/sales/product_rankings.csv",
+      "row": "product_id=22423",
+      "value": 330757.09000000043
+    },
+    {
+      "id": "weekday_pattern",
+      "text": "Thursday had the highest average daily positive-sales value: \u00a337,923.16 over 106 covered calendar days, including zero-sales dates.",
+      "source": "outputs/sales/weekday_seasonality.csv",
+      "row": "weekday=Thursday",
+      "value": 37923.15811320754
+    }
+  ]
+}

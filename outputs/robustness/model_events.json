@@ -1,0 +1,698 @@
+[
+  {
+    "split": "2011-01-01",
+    "product_id": "15036",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "20725",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "21232",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "21980",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 20
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "21981",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 20
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "21982",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "21984",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 20
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "84347",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "84755",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "84879",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "84991",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "84992",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "85099B",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "2011-01-01",
+    "product_id": "85123A",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "17003",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "20725",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "21213",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "21232",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "21977",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "21980",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 20
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "21981",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 20
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "21982",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "21984",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 20
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "84347",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "84755",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "84879",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "84991",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "84992",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "85099B",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-03-01",
+    "product_id": "85123A",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "17003",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "20725",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "21212",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "21213",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "21232",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "21977",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "21980",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "21981",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 20
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "21984",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 20
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "22197",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "84347",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "84755",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "84879",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "84991",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-05-01",
+    "product_id": "85099B",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "17003",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "21212",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "21213",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "21232",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "21980",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "21981",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "21982",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "21984",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 20
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "84347",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 8
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "84879",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "84991",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "84992",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "85099B",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-07-01",
+    "product_id": "85123A",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "15036",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "17003",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "21212",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "21213",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "21232",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "21980",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "21981",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 12
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "21982",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 12
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "21984",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 16
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "84347",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 16
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "84755",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "84991",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "84992",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-09-01",
+    "product_id": "85123A",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "15036",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "17003",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "20725",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "21212",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "21213",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "21232",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "21980",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "21981",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "21984",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "84755",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "84879",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "84991",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "84992",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  },
+  {
+    "split": "2011-11-01",
+    "product_id": "85123A",
+    "model": "hw_weekly",
+    "status": "ok",
+    "warnings": [],
+    "negative_predictions_clipped": 4
+  }
+]

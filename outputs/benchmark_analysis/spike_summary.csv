@@ -1,0 +1,3 @@
+model,spike_product_days,product_days,spike_absolute_error,total_absolute_error,spike_error_share_pct
+hw_weekly,3,560,4834.276929679909,38533.58248510602,12.545620256171228
+seasonal_naive,3,560,3566.0,54169.0,6.5831010356476956

@@ -1,0 +1,3 @@
+# Preserve the exact bytes used by checksums and reproducibility manifests.
+# Text remains diffable; Git must not rewrite line endings on checkout.
+* -text
