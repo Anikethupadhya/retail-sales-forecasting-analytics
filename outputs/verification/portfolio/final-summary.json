@@ -1,0 +1,82 @@
+{
+  "observed_at_utc": "2026-10-01T13:59:01.521965+00:00",
+  "tested_implementation_commit": "121930eb8981b586762a9029290cb3d8daa60a7d",
+  "reproduction": "final-reproduction/reproduction.json",
+  "reproduction_status": "passed",
+  "reproduction_duration_seconds": 27045.81,
+  "tests": {
+    "tests": 49,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "quick_demo": {
+    "status": "passed",
+    "tested_revision": "121930eb8981b586762a9029290cb3d8daa60a7d",
+    "raw_workbook_present": false,
+    "database_present": false,
+    "processed_cache_present": false,
+    "saved_outputs_used": true,
+    "tabs_checked": 3,
+    "walkthrough_examples_checked": 3,
+    "app_sha256": "27bd39bdde02ed5936ca3590ffc9d254066584483afb3a9f5ac1dee523521f27"
+  },
+  "reconciled_csv_count": 40,
+  "customer_free_parquet_reconciled": true,
+  "portfolio_claims_and_walkthrough_reconciled": true,
+  "maintained_documents_preserved": [
+    "README.md",
+    "docs/business-findings.md",
+    "docs/dashboard-walkthrough.md",
+    "docs/interview-guide.md",
+    "docs/resume-evidence.md",
+    "docs/error-analysis.md",
+    "docs/training-window-experiment.md"
+  ],
+  "protected_artifact_count": 50,
+  "baseline_artifact_count": 89,
+  "baseline_artifacts_unchanged": true,
+  "browser": {
+    "manifest": "browser.json",
+    "status": "passed",
+    "screenshots": 9,
+    "visually_inspected": true,
+    "page_errors": []
+  },
+  "forecasting_summary": {
+    "schema_version": 1,
+    "experiment": "training_windows_v1",
+    "best_method": "weekday_mean_4w",
+    "candidate": "weekday_mean_4w",
+    "comparator": "seasonal_naive",
+    "candidate_wape": 103.55868813422221,
+    "comparator_wape": 110.41658145992102,
+    "candidate_absolute_error_units": 227884.0,
+    "comparator_absolute_error_units": 242975.0,
+    "actual_units_per_method": 220053.0,
+    "relative_error_reduction_pct": 6.210927050108036,
+    "wape_difference_percentage_points": 6.857893325698811,
+    "methods": 6,
+    "products": 20,
+    "periods": 6,
+    "horizon_days": 28,
+    "prediction_rows": 20160,
+    "raw_rows": 1067371,
+    "retained_lines": 1013327,
+    "all_merchandise_products": 4706,
+    "formula": "100 \u00d7 (comparator absolute_error_sum \u2212 candidate absolute_error_sum) / comparator absolute_error_sum",
+    "sources": {
+      "metrics": "outputs/training_windows_v1/overall_metrics.csv",
+      "support": "outputs/training_windows_v1/predictions.csv",
+      "cohort": "outputs/robustness/split_manifest.json",
+      "audit": "outputs/sales/data_audit.json"
+    },
+    "scope": "20 pre-January-2011 products; six retrospective 28-day periods; identical observations; observed positive units",
+    "limitations": "Lowest pooled error among tested methods only. Later-2011 family selection and overlapping inspected evaluations; no independent holdout or significance claim. WAPE remains substantial."
+  },
+  "final_head_ci_and_pr": "review-evidence/portfolio-final-github.json and portfolio-final-pr.json in the review ZIP; these external snapshots are captured after the evidence commit",
+  "failed_runs_preserved": [
+    "failed-clone-run",
+    "failed-temp-run"
+  ]
+}

@@ -34,3 +34,7 @@ If local changes or divergent main prevent a fast-forward, preserve them and res
 Publication inspection uses `scripts/check_publication.py` on actual tracked files, reachable Git blobs, and nested ZIP entries, including CSV/Parquet schemas. It reports sanitized locations and inspection limits. Mere presence of an ignored local workbook is not evidence that raw data was committed. The targeted scan is not an exhaustive security guarantee.
 
 The dataset's CC BY 4.0 attribution remains. The repository currently has no explicit code license; choosing one is a separate owner decision and does not inherit automatically from the dataset license. Resolve any scan findings before public sharing. Repository visibility and licensing remain unchanged.
+
+## Current implementation verification
+
+Tested implementation `121930eb8981b586762a9029290cb3d8daa60a7d` passed full clean reproduction: 49 tests, no failures/errors/skips, saved-output quick demo before raw acquisition, full rebuild, 40 CSVs plus Parquet/portfolio JSON reconciliation and exact historical hashes. Rendered Edge inspection covers nine screenshots with zero page errors. The final branch head adds evidence and documentation only; its complete implementation input set must match this revision. Latest-head push/PR checks, mergeability and head SHA are captured after the final push in the review ZIP under `review-evidence/portfolio-final-github.json` and `portfolio-final-pr.json`. The PR is intentionally draft; confirm those live checks and conflicts before marking it ready.

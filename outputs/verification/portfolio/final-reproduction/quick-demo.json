@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "tested_revision": "121930eb8981b586762a9029290cb3d8daa60a7d",
+  "raw_workbook_present": false,
+  "database_present": false,
+  "processed_cache_present": false,
+  "saved_outputs_used": true,
+  "tabs_checked": 3,
+  "walkthrough_examples_checked": 3,
+  "app_sha256": "27bd39bdde02ed5936ca3590ffc9d254066584483afb3a9f5ac1dee523521f27"
+}

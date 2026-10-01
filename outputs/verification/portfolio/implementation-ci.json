@@ -1,0 +1,24 @@
+{
+  "total_count": 2,
+  "workflow_runs": [
+    {
+      "id": 36824807048,
+      "name": "Portfolio checks",
+      "head_sha": "121930eb8981b586762a9029290cb3d8daa60a7d",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Anikethupadhya/retail-sales-forecasting-analytics/actions/runs/36824807048"
+    },
+    {
+      "id": 36824802388,
+      "name": "Portfolio checks",
+      "head_sha": "121930eb8981b586762a9029290cb3d8daa60a7d",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Anikethupadhya/retail-sales-forecasting-analytics/actions/runs/36824802388"
+    }
+  ],
+  "observed_at_utc": "2026-10-01T13:54:50.412249+00:00"
+}
