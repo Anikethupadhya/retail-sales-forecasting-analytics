@@ -91,7 +91,9 @@ def main():
     started = time.time()
     record()
     try:
-        command('clone',['git','clone','--local','--no-hardlinks',ROOT,workspace],ROOT)
+        # Trust only this explicitly selected source repository for this command.
+        # Managed Windows checkouts may have a different owner; never alter global trust.
+        command('clone',['git','-c',f'safe.directory={ROOT.as_posix()}/.git','clone','--local','--no-hardlinks',ROOT,workspace],ROOT)
         command('checkout',['git','checkout','--detach',revision])
         result['checkout_initial_status'] = subprocess.check_output(['git','status','--porcelain'],cwd=workspace,text=True).strip()
         assert not result['checkout_initial_status'], 'Initial checkout must be clean'

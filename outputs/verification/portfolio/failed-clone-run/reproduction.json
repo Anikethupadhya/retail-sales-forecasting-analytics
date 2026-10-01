@@ -1,0 +1,41 @@
+{
+  "run_id": "20261001T061002Z-cbd39bba",
+  "tested_implementation_commit": "56f75aa64894b0d21dcdff7b73174dcd81ee2002",
+  "status": "failed",
+  "driver_python": "3.14.3",
+  "workspace": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T061002Z-cbd39bba\\workspace",
+  "environment": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T061002Z-cbd39bba\\environment",
+  "evidence_directory": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T061002Z-cbd39bba\\evidence",
+  "commands": [
+    {
+      "label": "clone",
+      "argv": [
+        "git",
+        "clone",
+        "--local",
+        "--no-hardlinks",
+        "C:\\Users\\anike\\Retail-Demand-Forcasting",
+        "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T061002Z-cbd39bba\\workspace"
+      ],
+      "cwd": "C:\\Users\\anike\\Retail-Demand-Forcasting",
+      "exit_status": 128,
+      "seconds": 0.932
+    }
+  ],
+  "initial_processed_cache_files": 0,
+  "tolerances": {
+    "relative": 1e-10,
+    "forecast_metric_absolute": 1e-08,
+    "sales_gbp_absolute": 1e-06
+  },
+  "excluded_nondeterministic_metadata": [
+    "run_manifest.duration_seconds",
+    "experiment_manifest.duration_seconds",
+    "experiment_manifest.implementation_revision (checked against tested revision)",
+    "experiment_manifest.source_checksums and input_checksums (checked independently against this checkout)",
+    "experiment_manifest.implementation_inputs_dirty_before_execution (must be false in the clean run)",
+    "Plotly HTML div IDs"
+  ],
+  "error": "RuntimeError('clone failed (128); inspect C:\\\\Users\\\\anike\\\\Retail-Demand-Forcasting\\\\.verification-runs\\\\20261001T061002Z-cbd39bba\\\\evidence')",
+  "duration_seconds": 1.03
+}

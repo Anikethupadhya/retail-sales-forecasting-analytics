@@ -38,3 +38,5 @@ Starting revision: 8af778c01ba8a2bda40625db62bfe05629a8a8f6. Local/remote heads 
 | Push/PR/review | Existing pushed branch and draft PR | Updated final review | Real commits, latest-head checks, merge instructions | Pending |
 
 Development verification: 47 tests passed after screenshot capture; two further package-guard cases passed. The initial link check correctly failed before the three new screenshots existed, then passed after capture. Protected/result hash comparison found no changes. Final exact-commit reproduction and rendered evidence remain pending.
+
+Clean verification initially failed before analysis because the managed source .git owner differs from the verifier user. A command-scoped safe.directory entry for this exact source .git successfully cloned it; no global Git trust or ACL change was made. Failed-run evidence is preserved under outputs/verification/portfolio/failed-clone-run. A new exact-revision run follows this repair.
