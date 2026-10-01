@@ -137,7 +137,11 @@ def main():
         result['maintained_prose_preserved']=documentation_paths
         assert sha(raw)==expected
         result['raw_sha256'] = sha(raw)
-        command('tests',[python,'-m','pytest','-q',f'--junitxml={evidence / "tests.xml"}'])
+        # Keep fixtures isolated from other users' shared pytest temporary roots.
+        # The run directory is new, so pytest cannot remove an unrelated directory.
+        test_temp = run/'test-temp'
+        assert not test_temp.exists(), 'Test temporary directory must be fresh'
+        command('tests',[python,'-m','pytest','-q',f'--basetemp={test_temp}',f'--junitxml={evidence / "tests.xml"}'])
         command('dashboard-smoke',[python,'-c',"from streamlit.testing.v1 import AppTest; a=AppTest.from_file('app.py').run(timeout=60); assert not a.exception; assert [t.label for t in a.tabs]==['Sales Overview','Forecast Evaluation','Model Performance']"])
         reconciled = []
         for folder in ['sales','robustness','benchmark_analysis','training_windows_v1','portfolio']:
