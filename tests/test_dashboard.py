@@ -53,6 +53,31 @@ def test_window_controls_load_saved_series_without_fitting(monkeypatch):
 
 
 @pytest.mark.dashboard
+def test_walkthrough_shortcuts_match_evidence_without_fitting(monkeypatch):
+    import json
+    import src.forecast
+    import src.training_windows
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Walkthrough must use saved forecasts")
+    monkeypatch.setattr(src.forecast,"predict",forbidden)
+    monkeypatch.setattr(src.training_windows,"evaluate_windows",forbidden)
+    evidence = json.loads((OUT/"portfolio/walkthrough_examples.json").read_text(encoding="utf-8"))
+    app = AppTest.from_file(str(ROOT/"app.py")).run(timeout=60)
+    assert any("Start here" in m.value for m in app.markdown)
+    for example in evidence["examples"]:
+        app.selectbox(key="walkthrough_example").select(example["id"].title()).run(timeout=60)
+        assert not app.exception
+        assert app.selectbox(key="experiment").value == "Training-window experiment"
+        assert app.selectbox(key="period").value["forecast_start"] == example["forecast_start"]
+        assert app.selectbox(key="product_robustness").value == example["product_id"]
+        assert app.multiselect(key="window_methods").value == []
+        assert app.multiselect(key="window_baselines").value == example["selectors"]["Baseline comparisons"]
+    app.selectbox(key="product_robustness").select_index(0).run(timeout=60)
+    assert not app.exception
+    assert any("Manual selections differ" in c.value for c in app.caption)
+
+
+@pytest.mark.dashboard
 @pytest.mark.parametrize("partial",[False,True])
 def test_missing_results_show_rebuild_instructions(monkeypatch,tmp_path,partial):
     import src.common

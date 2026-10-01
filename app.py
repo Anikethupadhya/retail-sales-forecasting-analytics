@@ -16,6 +16,7 @@ LABELS.update({"hw_expanding":"Smoothing · expanding history","hw_182d":"Smooth
 st.set_page_config(page_title="Retail Sales Forecasting & Analytics", layout="wide")
 st.title("Retail Sales Forecasting & Analytics")
 st.caption("UCI Online Retail II · December 1, 2009–December 8, 2011 · Historical observed positive sales · GBP")
+st.markdown("**Start here:** Sales Overview answers what sold and when across all merchandise. Forecast Evaluation lets you inspect one product and historical period. Model Performance compares the fixed cohort across all six periods. All charts use saved results.")
 if not (OUT / "run_manifest.json").exists():
     st.info("Run python -m src.pipeline to create the saved results.")
     st.stop()
@@ -43,13 +44,13 @@ def load_data(version):
         if "date" in frame:
             frame["date"] = pd.to_datetime(frame.date)
         d[f"benchmark/{name}"] = frame
-    for name in ["sales/data_audit", "sales/findings", "robustness/split_manifest", "robustness/model_events"]:
+    for name in ["sales/data_audit", "sales/findings", "robustness/split_manifest", "robustness/model_events", "portfolio/summary", "portfolio/walkthrough_examples"]:
         d[name] = json.loads((OUT / f"{name}.json").read_text(encoding="utf-8"))
     return d
 
 
 try:
-    d = load_data((OUT / "run_manifest.json").stat().st_mtime_ns)
+    d = load_data(tuple((OUT / name).stat().st_mtime_ns for name in ["run_manifest.json", "sales/findings.json", "portfolio/summary.json", "portfolio/walkthrough_examples.json"]))
 except FileNotFoundError:
     st.info("Saved results are incomplete. Run python -m src.pipeline to rebuild all outputs.")
     st.stop()
@@ -94,6 +95,27 @@ with overview:
 
 with evaluation:
     st.subheader("Historical fixed-origin backtests")
+    walkthrough = {e["id"].title(): e for e in d["portfolio/walkthrough_examples"]["examples"]}
+    def apply_walkthrough():
+        example = walkthrough.get(st.session_state.walkthrough_example)
+        if example:
+            st.session_state.experiment = "Training-window experiment"
+            st.session_state.period = next(s for s in d["robustness/split_manifest"]["splits"] if s["forecast_start"] == example["forecast_start"])
+            st.session_state.product_robustness = example["product_id"]
+            st.session_state.window_methods = []
+            st.session_state.window_baselines = example["selectors"]["Baseline comparisons"]
+    st.selectbox("Walkthrough example", ["Explore freely", *walkthrough], key="walkthrough_example", on_change=apply_walkthrough)
+    example = walkthrough.get(st.session_state.walkthrough_example)
+    if example:
+        matches = (st.session_state.get("experiment") == "Training-window experiment"
+                   and st.session_state.get("period", {}).get("forecast_start") == example["forecast_start"]
+                   and st.session_state.get("product_robustness") == example["product_id"]
+                   and st.session_state.get("window_methods") == []
+                   and st.session_state.get("window_baselines") == example["selectors"]["Baseline comparisons"])
+        if matches:
+            st.caption(f"Illustrative example selected after inspecting results: {example['product_id']} — {example['description']}. {example['interpretation']} Manual selectors remain available.")
+        else:
+            st.caption("Manual selections differ from the walkthrough preset. The chart and scores reflect the current selectors; reselect an example to apply its saved settings.")
     experiment = st.selectbox("Evaluation experiment", ["Existing corrected benchmark", "Retrospective robustness", "Training-window experiment"], key="experiment")
     original = experiment.startswith("Existing")
     windows = experiment == "Training-window experiment"
@@ -151,7 +173,7 @@ with evaluation:
         st.dataframe(product[shown], hide_index=True, width="stretch", column_config={"mae": st.column_config.NumberColumn("MAE (units)", format="%.2f"), "wape": st.column_config.NumberColumn("Product WAPE (%)", format="%.2f")})
     with col2:
         st.markdown(f"**Whole {len(metadata)}-product cohort, this period**")
-        st.dataframe(cohort_metrics[shown], hide_index=True, width="stretch", column_config={"mae": st.column_config.NumberColumn("MAE (units)", format="%.2f"), "wape": st.column_config.NumberColumn("Pooled WAPE (%)", format="%.2f")})
+        st.dataframe(cohort_metrics[shown].assign(model=lambda f:f.model.map(LABELS)), hide_index=True, width="stretch", column_config={"mae": st.column_config.NumberColumn("MAE (units)", format="%.2f"), "wape": st.column_config.NumberColumn("Pooled WAPE (%)", format="%.2f")})
     with st.expander("Cohort membership and historical coverage"):
         st.write(f"Grid coverage: {hist.date.min():%Y-%m-%d} to {hist.date.max():%Y-%m-%d}; {int(hist.units.gt(0).sum())} positive-sales days.")
         st.dataframe(metadata.reset_index(), hide_index=True)
@@ -160,6 +182,8 @@ with evaluation:
 
 with performance:
     st.subheader("Training-window experiment · six periods pooled")
+    summary = d["portfolio/summary"]
+    st.info(f"Lowest pooled error among tested methods: four-week weekday average, {summary['candidate_wape']:.2f}% WAPE versus {summary['comparator_wape']:.2f}% for last-week repetition. Relative error reduction: {summary['relative_error_reduction_pct']:.1f}% across {summary['products']} products and {summary['periods']} retrospective {summary['horizon_days']}-day periods. Errors remain substantial.")
     st.caption("20 fixed products; 3,360 product-days per method. WAPE is normalized absolute error, not accuracy. Retrospective analysis; lower is better.")
     window_metrics = d["training_windows_v1/overall_metrics"]
     shown_metrics = window_metrics[["model","mae","wape","mean_product_wape","signed_bias","percentage_bias"]].copy()

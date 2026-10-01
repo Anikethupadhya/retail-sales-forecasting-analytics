@@ -1,0 +1,15 @@
+{
+  "status": "no_matches_in_inspected_scope",
+  "revision": "d0ac555105a1999dd8fedacc3e0ffb6913050cca",
+  "counts": {
+    "tracked_files": 216,
+    "reachable_blobs": 262,
+    "nested_archives": 2,
+    "inspected_items": 606
+  },
+  "findings": [],
+  "patterns": "GitHub/OpenAI/AWS key formats and private-key headers; raw/sensitive names; customer/invoice CSV/Parquet fields; nested ZIP entries",
+  "limits": "Targeted patterns and known extract schemas do not prove exhaustive absence of secrets or personal data. Other credential formats, encoded/encrypted payloads and unidentified schemas require separate review.",
+  "code_license_present": false,
+  "repository_visibility_changed": false
+}

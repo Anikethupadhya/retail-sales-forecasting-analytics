@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -45,6 +46,22 @@ def compare_frame(left, right, label):
     return keys
 
 
+def compare_json(left, right, label):
+    """Exact structure/text/counts; full-precision numerical claims use existing tolerances."""
+    if isinstance(left,dict):
+        assert isinstance(right,dict) and left.keys()==right.keys(), label
+        for key in left:
+            compare_json(left[key],right[key],f"{label}:{key}")
+    elif isinstance(left,list):
+        assert isinstance(right,list) and len(left)==len(right),label
+        for index,(a,b) in enumerate(zip(left,right,strict=True)):
+            compare_json(a,b,f"{label}:{index}")
+    elif isinstance(left,float):
+        np.testing.assert_allclose(left,right,rtol=1e-10,atol=1e-6 if any(k in label for k in ['gbp','value']) else 1e-8,err_msg=label)
+    else:
+        assert type(left)==type(right) and left==right,label
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--revision',default='HEAD')
@@ -80,51 +97,61 @@ def main():
         assert not result['checkout_initial_status'], 'Initial checkout must be clean'
         result['source_checksums'] = {p.relative_to(workspace).as_posix():sha(p) for folder in ['src','sql','tests','scripts','protocols','.github'] for p in (workspace/folder).rglob('*') if p.is_file()}
         result['source_checksums'].update({n:sha(workspace/n) for n in ['app.py','config.json','requirements.txt','.gitattributes','pytest.ini','package.json'] if (workspace/n).exists()})
+        documentation_paths=['README.md','docs/business-findings.md','docs/dashboard-walkthrough.md','docs/interview-guide.md','docs/resume-evidence.md','docs/error-analysis.md','docs/training-window-experiment.md']
+        def maintained(path):
+            text=(workspace/path).read_text(encoding='utf-8')
+            starts=re.findall(r'<!-- generated:([^:]+):start -->',text)
+            ends=re.findall(r'<!-- generated:([^:]+):end -->',text)
+            assert sorted(starts)==sorted(ends) and len(starts)==len(set(starts)),path
+            return re.sub(r'<!-- generated:([^:]+):start -->.*?<!-- generated:\1:end -->','',text,flags=re.S)
+        maintained_reference={p:maintained(p) for p in documentation_paths}
         shutil.copytree(workspace/'outputs',reference)
-        # Delete only this newly created resolved checkout's generated output directory.
-        shutil.rmtree(workspace/'outputs')
         assert not (workspace/'data/processed').exists()
-        result['copied_generated_outputs_removed'] = True
         result['protected_checksums'] = {p.relative_to(workspace).as_posix():sha(p) for folder in ['archives','protocols'] for p in (workspace/folder).rglob('*') if p.is_file()}
         raw = workspace/'data/raw/online_retail_II.xlsx'
         raw.parent.mkdir(parents=True,exist_ok=True)
         expected = json.loads((reference/'run_manifest.json').read_text(encoding="utf-8"))['raw_sha256']
+        command('create-environment',[sys.executable,'-m','venv',environment])
+        python = environment/('Scripts/python.exe' if sys.platform=='win32' else 'bin/python')
+        command('install',[python,'-m','pip','install','-r',workspace/'requirements.txt'])
+        command('pip-check',[python,'-m','pip','check'])
+        command('environment-freeze',[python,'-m','pip','freeze'])
+        command('quick-demo',[python,workspace/'scripts/verify_quick_demo.py','--evidence',evidence/'quick-demo.json'])
+        result['quick_demo_before_raw_data_rebuild'] = json.loads((evidence/'quick-demo.json').read_text(encoding='utf-8'))
+        # Delete only the generated output copies in this freshly created checkout.
+        checked_workspace = workspace.resolve()
+        target = (workspace/'outputs').resolve()
+        assert target.parent==checked_workspace and checked_workspace.parent==run.resolve()
+        shutil.rmtree(target)
+        result['copied_generated_outputs_removed'] = True
         if args.raw_workbook.exists():
             assert sha(args.raw_workbook)==expected, 'Official workbook checksum mismatch'
             shutil.copy2(args.raw_workbook,raw)
             result['raw_acquisition'] = 'Explicit copy of existing checksum-verified official UCI workbook'
         else:
             result['raw_acquisition'] = 'Official UCI acquisition by pipeline; checked after execution'
-        command('create-environment',[sys.executable,'-m','venv',environment])
-        python = environment/('Scripts/python.exe' if sys.platform=='win32' else 'bin/python')
-        command('install',[python,'-m','pip','install','-r',workspace/'requirements.txt'])
-        command('pip-check',[python,'-m','pip','check'])
-        command('environment-freeze',[python,'-m','pip','freeze'])
         command('pipeline',[python,'-m','src.pipeline'])
+        assert maintained_reference=={p:maintained(p) for p in documentation_paths}, 'Pipeline erased maintained prose'
+        result['maintained_prose_preserved']=documentation_paths
         assert sha(raw)==expected
         result['raw_sha256'] = sha(raw)
         command('tests',[python,'-m','pytest','-q',f'--junitxml={evidence / "tests.xml"}'])
         command('dashboard-smoke',[python,'-c',"from streamlit.testing.v1 import AppTest; a=AppTest.from_file('app.py').run(timeout=60); assert not a.exception; assert [t.label for t in a.tabs]==['Sales Overview','Forecast Evaluation','Model Performance']"])
         reconciled = []
-        for folder in ['sales','robustness','benchmark_analysis','training_windows_v1']:
+        for folder in ['sales','robustness','benchmark_analysis','training_windows_v1','portfolio']:
             for path in sorted((reference/folder).glob('*.csv')):
                 relative = path.relative_to(reference)
                 keys = compare_frame(pd.read_csv(path,dtype={'product_id':str}),pd.read_csv(workspace/'outputs'/relative,dtype={'product_id':str}),str(relative))
                 reconciled.append({'path':str(relative),'keys':keys})
         compare_frame(pd.read_parquet(reference/'sales/product_daily_sales.parquet'),pd.read_parquet(workspace/'outputs/sales/product_daily_sales.parquet'),'customer-free parquet')
-        for folder in ['sales','robustness','benchmark_analysis','training_windows_v1']:
+        for folder in ['sales','robustness','benchmark_analysis','training_windows_v1','portfolio']:
             for path in sorted((reference/folder).glob('*.json')):
                 if path.name=='experiment_manifest.json':
                     continue
                 relative = path.relative_to(reference)
                 left,right = json.loads(path.read_text(encoding="utf-8")),json.loads((workspace/'outputs'/relative).read_text(encoding="utf-8"))
-                if path.name=='findings.json':
-                    assert left['scope']==right['scope']
-                    for a,b in zip(left['findings'],right['findings'],strict=True):
-                        np.testing.assert_allclose(a['value'],b['value'],rtol=1e-10,atol=1e-6)
-                        assert {k:v for k,v in a.items() if k!='value'}=={k:v for k,v in b.items() if k!='value'}
-                else:
-                    assert left==right, relative
+                compare_json(left,right,str(relative))
+        result['portfolio_claims_and_walkthrough_reconciled'] = True
         for path,checksum in result['protected_checksums'].items():
             assert sha(workspace/path)==checksum, path
         result['environment_record'] = json.loads((workspace/'outputs/run_manifest.json').read_text(encoding="utf-8"))

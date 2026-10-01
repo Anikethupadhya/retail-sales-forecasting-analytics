@@ -123,3 +123,29 @@ def test_portfolio_local_links_and_generated_claims():
         text = path.read_text(encoding="utf-8")
         assert f"{s['relative_error_reduction_pct']:.1f}%" in text
         assert "later-2011" in text.lower() and "last-week" in text.lower()
+
+
+@pytest.mark.parametrize("change",["modified","added"])
+def test_package_rejects_changed_implementation_file_set(tmp_path, monkeypatch, change):
+    import scripts.package_review as package
+    import sys
+    root=tmp_path/"project"; root.mkdir()
+    for folder in ["src","sql","tests","scripts","protocols",".github"]:
+        (root/folder).mkdir()
+    checks={}
+    for name in ["app.py","config.json","requirements.txt",".gitattributes","pytest.ini","package.json"]:
+        (root/name).write_text("verified bytes",encoding="utf-8")
+        checks[name]=hashlib.sha256((root/name).read_bytes()).hexdigest()
+    evidence=root/"evidence"; (evidence/"final-reproduction").mkdir(parents=True)
+    (evidence/"final-reproduction/reproduction.json").write_text(json.dumps({"status":"passed","tested_implementation_commit":"tested","source_checksums":checks}))
+    (evidence/"browser.json").write_text(json.dumps({"status":"passed","page_errors":[],"implementation_revision":"tested","source_checksums":{}}))
+    if change=="modified":
+        (root/"app.py").write_text("untested behavior",encoding="utf-8")
+    else:
+        (root/"src/new.py").write_text("untested addition",encoding="utf-8")
+    monkeypatch.setattr(package,"ROOT",root)
+    monkeypatch.setattr(package,"verify_archives",lambda:0)
+    monkeypatch.setattr(sys,"argv",["package_review.py","--evidence-dir",str(evidence)])
+    with pytest.raises(RuntimeError,match="changed since clean verification"):
+        package.main()
+    assert not (root/"deliverables").exists()

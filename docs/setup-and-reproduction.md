@@ -32,6 +32,16 @@ Launch the saved-output dashboard:
 
 Open http://localhost:8501. No selector fits models. A cloned repository includes customer-free aggregates and saved forecasts, so it can display the dashboard without the raw workbook or DuckDB binary. Missing results display rebuild instructions.
 
+This is the quick demonstration path: clone/switch branch, install the environment, then launch directly. Do not run the full pipeline merely to inspect the saved dashboard. [The walkthrough](dashboard-walkthrough.md) applies manifest-driven improvement, deterioration and spike selectors.
+
+Report-only regeneration is a separate inexpensive command:
+
+```powershell
+.\.venv\Scripts\python -m src.report
+```
+
+It reads authoritative saved SQL/forecast outputs, refreshes findings/claim/walkthrough evidence, and updates only bounded owned sections. It performs no raw preparation, database creation or forecasting. [Ownership rules](report-ownership.md) explain how maintained prose survives repeated generation.
+
 Routine checks, requiring neither workbook nor existing database:
 
 ```powershell
@@ -65,4 +75,6 @@ npm run dashboard:check
 
 Alternatively use an installed Edge browser with $env:PLAYWRIGHT_CHANNEL='msedge'. [Playwright browser documentation](https://playwright.dev/docs/browsers) describes branded channels. SCREENSHOT_DIR and BROWSER_EVIDENCE can select run-specific evidence paths. The current Windows inspection used local Edge and Playwright 1.62.1 from the bundled Node runtime. Browser packages are optional development dependencies, not forecasting or routine CI dependencies.
 
-After final verification, python scripts/package_review.py creates the allowlisted deliverables/retail-sales-forecasting-analytics-review.zip. Its manifest records per-entry SHA-256 and package integrity/exclusions. Raw data, customer-level extracts, environments, caches, .git and database binaries remain excluded.
+Before copying raw data or removing saved outputs, the current exact-commit verifier proves the quick demonstration in the fresh checkout without a workbook, processed cache or database. It then removes generated output copies, performs the full rebuild, and reconciles the new portfolio JSON alongside the established 40 CSVs and Parquet. The quick demonstration and full reproduction have separate evidence and prove different things.
+
+After final verification, `python scripts/package_review.py` binds the allowlisted review ZIP to `outputs/verification/portfolio/final-reproduction/reproduction.json` and the current rendered-browser manifest. Its manifest identifies the tested implementation and packaging revisions, source/protocol checksums, included verification paths and per-entry hashes. Source additions or changed bytes invalidate the guard. The earlier review package is preserved locally. Raw data, customer-level extracts, environments, caches, .git and database binaries remain excluded.

@@ -29,10 +29,12 @@ Starting revision: 8af778c01ba8a2bda40625db62bfe05629a8a8f6. Local/remote heads 
 
 | Requirement | Existing implementation | Actual gap | Necessary change | Verification |
 | --- | --- | --- | --- | --- |
-| Report ownership | Main writer replaces README; secondary appends | Maintained prose is overwritten / direct repeats duplicate sections | Bounded sections and temporary-root regression | Pending |
-| Findings | Three correct SQL findings | Limited formula/denominator metadata | Extend authoritative artifact and shared interpreter | Pending |
-| README/interview/resume | Technical narrative and smoothing-focused bullet | Recruiter explanation and winning-method claim | Maintained README and generated evidence | Pending |
-| Dashboard/walkthrough | Three tabs and saved controls | Start guidance and reproducible illustrative examples | Shared manifest and selector shortcuts | Pending |
+| Report ownership | Main writer replaces README; secondary appends | Maintained prose is overwritten / direct repeats duplicate sections | Bounded sections and temporary-root regression | Four regression cases passed |
+| Findings | Three correct SQL findings | Limited formula/denominator metadata | Extend authoritative artifact and shared interpreter | SQL/claim integration passed |
+| README/interview/resume | Technical narrative and smoothing-focused bullet | Recruiter explanation and winning-method claim | Maintained README and generated evidence | Links/claims passed; 856 narrative words |
+| Dashboard/walkthrough | Three tabs and saved controls | Start guidance and reproducible illustrative examples | Shared manifest and selector shortcuts | Five dashboard tests passed; nine development screenshots inspected |
 | Quick demonstration | Saved-output application | Fresh-checkout proof before raw-data rebuild | Raw/database-free smoke evidence | Pending |
 | Exact verification/package | Prior-phase guards and evidence | Bind to this phase | New run evidence and current provenance | Pending |
 | Push/PR/review | Existing pushed branch and draft PR | Updated final review | Real commits, latest-head checks, merge instructions | Pending |
+
+Development verification: 47 tests passed after screenshot capture; two further package-guard cases passed. The initial link check correctly failed before the three new screenshots existed, then passed after capture. Protected/result hash comparison found no changes. Final exact-commit reproduction and rendered evidence remain pending.
