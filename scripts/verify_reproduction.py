@@ -144,8 +144,8 @@ def main():
             for name,checksum in experiment['input_checksums'].items():
                 assert checksum==sha(workspace/'outputs'/name), name
         result.update(status='passed',reconciled_csv_files=reconciled,customer_free_parquet_reconciled=True,protected_artifacts_unchanged=True,duration_seconds=round(time.time()-started,2))
-    except Exception as exc:
-        result.update(status='failed',error=str(exc),duration_seconds=round(time.time()-started,2))
+    except BaseException as exc:
+        result.update(status='interrupted' if isinstance(exc, KeyboardInterrupt) else 'failed',error=repr(exc),duration_seconds=round(time.time()-started,2))
         raise
     finally:
         record()

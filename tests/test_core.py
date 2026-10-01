@@ -18,6 +18,21 @@ def protocol():
     return json.loads((ROOT / "protocols/robustness_v1.json").read_text())
 
 
+def test_historical_archive_windows_keys_work_on_every_platform(monkeypatch,tmp_path):
+    import src.evidence as evidence
+    nested=tmp_path/"benchmark_corrected"
+    nested.mkdir()
+    content=b"immutable historical evidence"
+    (nested/"sample.txt").write_bytes(content)
+    manifest={"archive_files":{"benchmark_corrected\\sample.txt":hashlib.sha256(content).hexdigest()}}
+    (tmp_path/"manifest.json").write_text(json.dumps(manifest),encoding="utf-8")
+    monkeypatch.setattr(evidence,"ARCHIVE",tmp_path)
+    assert evidence.verify_archives()==1
+    (nested/"sample.txt").write_bytes(b"changed")
+    with pytest.raises(ValueError,match="Historical archive changed"):
+        evidence.verify_archives()
+
+
 def test_protocol_is_frozen_and_dates_are_unambiguous():
     path = ROOT / "protocols/robustness_v1.json"
     assert hashlib.sha256(path.read_bytes()).hexdigest() == path.with_suffix(".sha256").read_text().strip()

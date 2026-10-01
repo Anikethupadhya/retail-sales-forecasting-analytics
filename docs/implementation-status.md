@@ -18,3 +18,5 @@ Starting revision: d18fc1fe20c3ed6b766b515694886ca01c696286. Verified default br
 Decisions: 182 calendar days, not 180; baselines computed once with 7/28/56-day histories; common preorigin expanding-history spike thresholds; all failures remain in primary support. No tuning after outcomes. Best smoothing 182-day WAPE 103.97687999441006%; expanding 104.51904083308533%; 365-day 107.65276528826755%; strongest baseline weekday_mean_4w 103.55868813422221%. The small pooled improvement wins only 2/6 periods and 9/20 products.
 
 Old evidence and immutable artifacts are preserved. Evidence paths below outputs/verification/training-windows are new; source workspaces/environments/reference copies stay ignored under .verification-runs. No external blocker currently established.
+
+CI repair: d56f8e8 Linux integration failed because immutable archive manifest keys contain Windows backslashes. Preserve the original manifest and resolve its keys portably using PureWindowsPath. A deterministic regression checks unchanged hashes and rejects altered bytes. This requires a new final implementation revision and fresh full verification.

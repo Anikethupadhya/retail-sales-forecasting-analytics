@@ -1,6 +1,7 @@
 """Immutable historical evidence and benchmark error decomposition."""
 import hashlib
 import json
+from pathlib import PureWindowsPath
 
 import numpy as np
 import pandas as pd
@@ -15,7 +16,12 @@ BENCHMARK = ARCHIVE / "benchmark_corrected"
 def verify_archives():
     manifest = json.loads((ARCHIVE / "manifest.json").read_text(encoding="utf-8"))
     for path, expected in manifest["archive_files"].items():
-        if hashlib.sha256((ARCHIVE / path).read_bytes()).hexdigest() != expected:
+        # Historical keys were recorded on Windows. Interpret separators without
+        # changing the protected manifest bytes, including on Linux CI runners.
+        relative = PureWindowsPath(path)
+        if relative.anchor or ".." in relative.parts:
+            raise ValueError(f"Archive key must stay relative: {path}")
+        if hashlib.sha256(ARCHIVE.joinpath(*relative.parts).read_bytes()).hexdigest() != expected:
             raise ValueError(f"Historical archive changed: {path}")
     return len(manifest["archive_files"])
 

@@ -1,0 +1,102 @@
+{
+  "jobs": [
+    {
+      "id": 110177175709,
+      "name": "correctness",
+      "head_sha": "d56f8e8c0a7a3fc24db6d1564fd3d5d9886ce359",
+      "status": "completed",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-01T01:33:44Z",
+          "completed_at": "2026-10-01T01:33:44Z"
+        },
+        {
+          "name": "Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-01T01:33:44Z",
+          "completed_at": "2026-10-01T01:33:46Z"
+        },
+        {
+          "name": "Run actions/setup-python@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-01T01:33:46Z",
+          "completed_at": "2026-10-01T01:33:58Z"
+        },
+        {
+          "name": "Install exact Python dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-01T01:33:58Z",
+          "completed_at": "2026-10-01T01:34:32Z"
+        },
+        {
+          "name": "Verify dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-01T01:34:32Z",
+          "completed_at": "2026-10-01T01:34:33Z"
+        },
+        {
+          "name": "Fixture and unit checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-01T01:34:33Z",
+          "completed_at": "2026-10-01T01:34:38Z"
+        },
+        {
+          "name": "Customer-free saved-output integration",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 7,
+          "started_at": "2026-10-01T01:34:38Z",
+          "completed_at": "2026-10-01T01:34:41Z"
+        },
+        {
+          "name": "Saved-output dashboard smoke",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 8,
+          "started_at": "2026-10-01T01:34:41Z",
+          "completed_at": "2026-10-01T01:34:41Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v6",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 15,
+          "started_at": "2026-10-01T01:34:41Z",
+          "completed_at": "2026-10-01T01:34:41Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-10-01T01:34:41Z",
+          "completed_at": "2026-10-01T01:34:42Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-10-01T01:34:42Z",
+          "completed_at": "2026-10-01T01:34:42Z"
+        }
+      ]
+    }
+  ],
+  "observed_at_utc": "2026-10-01T01:34:56.785927+00:00"
+}
