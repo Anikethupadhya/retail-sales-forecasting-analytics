@@ -13,18 +13,21 @@ from src.evidence import verify_archives
 
 def main():
     verify_archives()
-    reproduction = json.loads((ROOT/"outputs/verification/reproduction.json").read_text())
-    browser = json.loads((ROOT/"outputs/verification/browser.json").read_text())
+    reproduction = json.loads((ROOT/"outputs/verification/training-windows/final-reproduction/reproduction.json").read_text(encoding="utf-8"))
+    browser = json.loads((ROOT/"outputs/verification/training-windows/browser.json").read_text(encoding="utf-8"))
     if reproduction["status"] != "passed" or browser["page_errors"]:
         raise RuntimeError("Verification must pass before packaging")
-    files = [ROOT/name for name in [".gitignore",".gitattributes","README.md","app.py","config.json","requirements.txt"]]
-    folders = ["src","sql","tests","scripts","protocols","docs","archives",
-               "outputs/sales","outputs/robustness","outputs/benchmark_analysis","outputs/verification"]
-    extensions = {".py",".sql",".cjs",".json",".sha256",".md",".txt",".csv",".parquet",".png",".html",".xml",".log",".zip"}
+    for name, checksum in reproduction["source_checksums"].items():
+        if hashlib.sha256((ROOT/name).read_bytes()).hexdigest() != checksum:
+            raise RuntimeError(f"Implementation changed since clean verification: {name}")
+    files = [ROOT/name for name in [".gitignore",".gitattributes","README.md","app.py","config.json","requirements.txt","pytest.ini","package.json","outputs/run_manifest.json"]]
+    folders = ["src","sql","tests","scripts","protocols","docs","archives",".github",
+               "outputs/sales","outputs/robustness","outputs/benchmark_analysis","outputs/training_windows_v1","outputs/verification"]
+    extensions = {".py",".sql",".cjs",".json",".sha256",".md",".txt",".csv",".parquet",".png",".html",".xml",".log",".zip",".yml",".yaml",".ini"}
     for folder in folders:
         files.extend(f for f in (ROOT/folder).rglob("*") if f.is_file() and f.suffix in extensions and "__pycache__" not in f.parts)
     files = sorted(set(files))
-    forbidden = ["data/raw/","data/processed/",".venv/",".repro-venv/",".repro-workspace/",".git/","returns_cancellations","excluded_rows",".duckdb"]
+    forbidden = ["data/raw/","data/processed/",".venv/",".repro-venv/",".repro-workspace/",".verification-runs/","node_modules/",".git/","returns_cancellations","excluded_rows",".duckdb"]
     for path in files:
         name = path.relative_to(ROOT).as_posix()
         if any(token in name for token in forbidden):

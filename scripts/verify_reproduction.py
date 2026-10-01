@@ -59,7 +59,7 @@ def main():
     result = {'run_id':run_id,'tested_implementation_commit':revision,'status':'running','driver_python':platform.python_version(),
         'workspace':str(workspace),'environment':str(environment),'evidence_directory':str(evidence),'commands':[],
         'initial_processed_cache_files':0,'tolerances':{'relative':1e-10,'forecast_metric_absolute':1e-8,'sales_gbp_absolute':1e-6},
-        'excluded_nondeterministic_metadata':['run_manifest.duration_seconds','experiment_manifest.duration_seconds','experiment_manifest.implementation_revision','experiment_manifest.source_checksums','Plotly HTML div IDs']}
+        'excluded_nondeterministic_metadata':['run_manifest.duration_seconds','experiment_manifest.duration_seconds','experiment_manifest.implementation_revision (checked against tested revision)','experiment_manifest.source_checksums and input_checksums (checked independently against this checkout)','experiment_manifest.implementation_inputs_dirty_before_execution (must be false in the clean run)','Plotly HTML div IDs']}
     def record():
         save_json(evidence/'reproduction.json',result)
     def command(label,argv,cwd=workspace):
@@ -79,7 +79,7 @@ def main():
         result['checkout_initial_status'] = subprocess.check_output(['git','status','--porcelain'],cwd=workspace,text=True).strip()
         assert not result['checkout_initial_status'], 'Initial checkout must be clean'
         result['source_checksums'] = {p.relative_to(workspace).as_posix():sha(p) for folder in ['src','sql','tests','scripts','protocols','.github'] for p in (workspace/folder).rglob('*') if p.is_file()}
-        result['source_checksums'].update({n:sha(workspace/n) for n in ['app.py','config.json','requirements.txt','.gitattributes']})
+        result['source_checksums'].update({n:sha(workspace/n) for n in ['app.py','config.json','requirements.txt','.gitattributes','pytest.ini','package.json'] if (workspace/n).exists()})
         shutil.copytree(workspace/'outputs',reference)
         # Delete only this newly created resolved checkout's generated output directory.
         shutil.rmtree(workspace/'outputs')
@@ -88,7 +88,7 @@ def main():
         result['protected_checksums'] = {p.relative_to(workspace).as_posix():sha(p) for folder in ['archives','protocols'] for p in (workspace/folder).rglob('*') if p.is_file()}
         raw = workspace/'data/raw/online_retail_II.xlsx'
         raw.parent.mkdir(parents=True,exist_ok=True)
-        expected = json.loads((reference/'run_manifest.json').read_text())['raw_sha256']
+        expected = json.loads((reference/'run_manifest.json').read_text(encoding="utf-8"))['raw_sha256']
         if args.raw_workbook.exists():
             assert sha(args.raw_workbook)==expected, 'Official workbook checksum mismatch'
             shutil.copy2(args.raw_workbook,raw)
@@ -99,6 +99,7 @@ def main():
         python = environment/('Scripts/python.exe' if sys.platform=='win32' else 'bin/python')
         command('install',[python,'-m','pip','install','-r',workspace/'requirements.txt'])
         command('pip-check',[python,'-m','pip','check'])
+        command('environment-freeze',[python,'-m','pip','freeze'])
         command('pipeline',[python,'-m','src.pipeline'])
         assert sha(raw)==expected
         result['raw_sha256'] = sha(raw)
@@ -116,7 +117,7 @@ def main():
                 if path.name=='experiment_manifest.json':
                     continue
                 relative = path.relative_to(reference)
-                left,right = json.loads(path.read_text()),json.loads((workspace/'outputs'/relative).read_text())
+                left,right = json.loads(path.read_text(encoding="utf-8")),json.loads((workspace/'outputs'/relative).read_text(encoding="utf-8"))
                 if path.name=='findings.json':
                     assert left['scope']==right['scope']
                     for a,b in zip(left['findings'],right['findings'],strict=True):
@@ -126,15 +127,22 @@ def main():
                     assert left==right, relative
         for path,checksum in result['protected_checksums'].items():
             assert sha(workspace/path)==checksum, path
-        result['environment_record'] = json.loads((workspace/'outputs/run_manifest.json').read_text())
-        assert result['environment_record']['python']==json.loads((reference/'run_manifest.json').read_text())['python'], 'Runtime changed'
+        result['environment_record'] = json.loads((workspace/'outputs/run_manifest.json').read_text(encoding="utf-8"))
+        assert result['environment_record']['python']==json.loads((reference/'run_manifest.json').read_text(encoding="utf-8"))['python'], 'Runtime changed'
         manifest = workspace/'outputs/training_windows_v1/experiment_manifest.json'
         if manifest.exists():
-            experiment = json.loads(manifest.read_text())
+            experiment = json.loads(manifest.read_text(encoding="utf-8"))
             assert experiment['implementation_revision']==revision
             assert experiment['implementation_inputs_dirty_before_execution'] is False
             result['experiment_provenance'] = experiment
             assert experiment['protocol_sha256']==sha(workspace/'protocols/training_windows_v1.json')
+            original_experiment = json.loads((reference/'training_windows_v1/experiment_manifest.json').read_text(encoding='utf-8'))
+            for key in ['experiment','protocol_commit','protocol_sha256','selected_product_ids','forecast_start_dates','rows_per_method','prediction_rows','raw_sha256','python','packages','limitations']:
+                assert experiment[key]==original_experiment[key], key
+            for name,checksum in experiment['source_checksums'].items():
+                assert checksum==result['source_checksums'][name], name
+            for name,checksum in experiment['input_checksums'].items():
+                assert checksum==sha(workspace/'outputs'/name), name
         result.update(status='passed',reconciled_csv_files=reconciled,customer_free_parquet_reconciled=True,protected_artifacts_unchanged=True,duration_seconds=round(time.time()-started,2))
     except Exception as exc:
         result.update(status='failed',error=str(exc),duration_seconds=round(time.time()-started,2))

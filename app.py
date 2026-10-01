@@ -10,7 +10,9 @@ from src.common import ROOT, OUT
 from src.evidence import BENCHMARK
 
 COLORS = {"actual": "#485e78", "hw_weekly": "#087f8c", "seasonal_naive": "#df8f2d", "weekday_mean_4w": "#7755a3", "weekday_mean_8w": "#be5368"}
+COLORS.update({"hw_expanding":"#087f8c","hw_182d":"#2c6bb0","hw_365d":"#ab5279"})
 LABELS = {"hw_weekly": "Weekly smoothing", "seasonal_naive": "Last-week baseline", "weekday_mean_4w": "4-week weekday average", "weekday_mean_8w": "8-week weekday average"}
+LABELS.update({"hw_expanding":"Smoothing · expanding history","hw_182d":"Smoothing · 182 days","hw_365d":"Smoothing · 365 days"})
 st.set_page_config(page_title="Retail Sales Forecasting & Analytics", layout="wide")
 st.title("Retail Sales Forecasting & Analytics")
 st.caption("UCI Online Retail II · December 1, 2009–December 8, 2011 · Historical observed positive sales · GBP")
@@ -27,6 +29,7 @@ def load_data(version):
     for folder, names in {
         "sales": ["daily_totals", "product_rankings", "monthly_trends", "weekday_seasonality", "comparable_growth"],
         "robustness": ["predictions", "product_metadata", "daily_sales", "overall_metrics", "product_metrics", "period_metrics", "period_product_metrics", "baseline_comparisons", "period_comparisons", "product_comparisons"],
+        "training_windows_v1": ["predictions", "overall_metrics", "product_metrics", "period_metrics", "period_product_metrics", "pairwise_comparisons", "product_comparisons", "period_comparisons", "product_contributions", "spike_summary", "spike_examples", "fit_records"],
         "benchmark_analysis": ["product_error_analysis", "largest_improvements", "largest_deteriorations", "daily_errors", "spike_summary", "overall_metrics"],
     }.items():
         for name in names:
@@ -41,11 +44,15 @@ def load_data(version):
             frame["date"] = pd.to_datetime(frame.date)
         d[f"benchmark/{name}"] = frame
     for name in ["sales/data_audit", "sales/findings", "robustness/split_manifest", "robustness/model_events"]:
-        d[name] = json.loads((OUT / f"{name}.json").read_text())
+        d[name] = json.loads((OUT / f"{name}.json").read_text(encoding="utf-8"))
     return d
 
 
-d = load_data((OUT / "run_manifest.json").stat().st_mtime_ns)
+try:
+    d = load_data((OUT / "run_manifest.json").stat().st_mtime_ns)
+except FileNotFoundError:
+    st.info("Saved results are incomplete. Run python -m src.pipeline to rebuild all outputs.")
+    st.stop()
 overview, evaluation, performance = st.tabs(["Sales Overview", "Forecast Evaluation", "Model Performance"])
 with overview:
     st.subheader("All cleaned merchandise · all countries")
@@ -87,8 +94,9 @@ with overview:
 
 with evaluation:
     st.subheader("Historical fixed-origin backtests")
-    experiment = st.selectbox("Evaluation experiment", ["Existing corrected benchmark", "Retrospective robustness"], key="experiment")
+    experiment = st.selectbox("Evaluation experiment", ["Existing corrected benchmark", "Retrospective robustness", "Training-window experiment"], key="experiment")
     original = experiment.startswith("Existing")
+    windows = experiment == "Training-window experiment"
     if original:
         predictions = d["benchmark/test_predictions"]
         history = d["benchmark/daily_sales"]
@@ -99,11 +107,12 @@ with evaluation:
         st.caption("20 products selected before August 19, 2011. The cross-sheet repair followed the first test observation; original model family and cohort were preserved.")
     else:
         date = st.selectbox("Forecast start", d["robustness/split_manifest"]["splits"], format_func=lambda s: s["forecast_start"], key="period")["forecast_start"]
-        predictions = d["robustness/predictions"].query("split == @date")
+        folder = "training_windows_v1" if windows else "robustness"
+        predictions = d[f"{folder}/predictions"].query("forecast_start == @date")
         history = d["robustness/daily_sales"]
         metadata = d["robustness/product_metadata"].set_index("product_id")
-        product_metrics = d["robustness/period_product_metrics"].query("forecast_start == @date")
-        cohort_metrics = d["robustness/period_metrics"].query("forecast_start == @date")
+        product_metrics = d[f"{folder}/period_product_metrics"].query("forecast_start == @date")
+        cohort_metrics = d[f"{folder}/period_metrics"].query("forecast_start == @date")
         st.caption("Fixed cohort selected before January 1, 2011. Family chosen on later-2011 validation; some periods overlap the existing benchmark. Retrospective comparison, not independent confirmation.")
     pid = st.selectbox("Product", metadata.index.tolist(), format_func=lambda p: f"{p} — {metadata.loc[p, 'description']}", key="product_" + ("benchmark" if original else "robustness"))
     part = predictions.query("product_id == @pid")
@@ -114,9 +123,20 @@ with evaluation:
     fig = go.Figure()
     before = hist[hist.date.between(origin-pd.Timedelta(days=90), origin)]
     fig.add_trace(go.Scatter(x=before.date, y=before.units, name="Observed history", line={"color": COLORS["actual"]}))
-    actual = part[part.model.eq("hw_weekly")]
+    actual = part[part.model.eq("hw_expanding" if windows else "hw_weekly")]
+    visible_methods = set(part.model)
+    if windows:
+        left, right = st.columns(2)
+        with left:
+            smoothing = st.multiselect("Smoothing histories", ["hw_expanding","hw_182d","hw_365d"], default=["hw_expanding"], format_func=lambda m: LABELS[m], key="window_methods")
+        with right:
+            baselines = st.multiselect("Baseline comparisons", ["seasonal_naive","weekday_mean_4w","weekday_mean_8w"], default=["weekday_mean_4w"], format_func=lambda m: LABELS[m], key="window_baselines")
+        visible_methods = set(smoothing+baselines)
+        st.caption("The method controls change saved chart series only. Expanding starts December 1, 2009; trailing histories end at the same cutoff and contain exactly 182 or 365 calendar days.")
     fig.add_trace(go.Scatter(x=actual.date, y=actual.actual, name="Observed evaluation sales", line={"color": COLORS["actual"]}))
     for model, series in part.groupby("model"):
+        if model not in visible_methods:
+            continue
         fig.add_trace(go.Scatter(x=series.date, y=series.prediction, name=LABELS[model], line={"color": COLORS[model], "dash": "solid" if model == "hw_weekly" else "dash"}))
     fig.add_vrect(x0=str(start.date()), x1=str((end+pd.Timedelta(days=1)).date()), fillcolor="#eab96b", opacity=0.13, line_width=0)
     fig.add_annotation(x=str(start.date()), y=1, yref="paper", text="28-day evaluation", showarrow=False, xanchor="left")
@@ -139,6 +159,33 @@ with evaluation:
             st.json(d["robustness/split_manifest"]["cohort_comparison"])
 
 with performance:
+    st.subheader("Training-window experiment · six periods pooled")
+    st.caption("20 fixed products; 3,360 product-days per method. WAPE is normalized absolute error, not accuracy. Retrospective analysis; lower is better.")
+    window_metrics = d["training_windows_v1/overall_metrics"]
+    shown_metrics = window_metrics[["model","mae","wape","mean_product_wape","signed_bias","percentage_bias"]].copy()
+    shown_metrics["model"] = shown_metrics.model.map(LABELS)
+    st.dataframe(shown_metrics, hide_index=True, width="stretch", column_config={"model":"Method", "wape":st.column_config.NumberColumn("Pooled WAPE (%)",format="%.2f"), "mae":st.column_config.NumberColumn("MAE (units)",format="%.2f"), "mean_product_wape":st.column_config.NumberColumn("Mean product WAPE (%)",format="%.2f"), "signed_bias":st.column_config.NumberColumn("Bias (units)",format="%+.2f"), "percentage_bias":st.column_config.NumberColumn("Bias (%)",format="%+.2f")})
+    window_candidate = st.selectbox("Compare smoothing history", ["hw_expanding","hw_182d","hw_365d"],format_func=lambda m:LABELS[m],key="window_candidate")
+    window_pairs = d["training_windows_v1/pairwise_comparisons"].query("model == @window_candidate")
+    pair_display = window_pairs[["baseline","relative_wape_reduction_pct","wins","losses","ties","undefined"]].copy()
+    pair_display["baseline"] = pair_display.baseline.map(LABELS)
+    st.dataframe(pair_display,hide_index=True,width="stretch",column_config={"baseline":"Comparator","relative_wape_reduction_pct":st.column_config.NumberColumn("Relative WAPE reduction (%)",format="%+.2f")})
+    window_period = d["training_windows_v1/period_metrics"].copy()
+    window_period["method"] = window_period.model.map(LABELS)
+    fig = px.line(window_period[window_period.model.isin(["hw_expanding","hw_182d","hw_365d"])],x="forecast_start",y="wape",color="method",markers=True,color_discrete_map={LABELS[m]:COLORS[m] for m in ["hw_expanding","hw_182d","hw_365d"]})
+    fig.update_layout(height=290,xaxis_title="Historical forecast start",yaxis_title="Period pooled WAPE (%)",legend={"orientation":"h","y":-0.25,"title":""},margin={"t":10})
+    st.plotly_chart(fig,width="stretch")
+    st.caption("Each point is one 28-day evaluation; six-period WAPE pools errors and actual units. Period differences are descriptive and do not establish statistical significance.")
+    with st.expander("Training-window product contributions, bias, spikes and fit records"):
+        contribution = d["training_windows_v1/product_contributions"].query("model == @window_candidate and baseline == 'hw_expanding'")
+        if contribution.empty:
+            contribution = d["training_windows_v1/product_contributions"].query("model == @window_candidate and baseline == 'weekday_mean_4w'")
+        st.dataframe(contribution.sort_values("actual_units",ascending=False),hide_index=True,width="stretch")
+        st.write("Common spikes: actual units strictly above the product/origin expanding-history 99th percentile, including zeros and using linear interpolation. All spikes remain in primary metrics.")
+        st.dataframe(d["training_windows_v1/spike_summary"],hide_index=True,width="stretch")
+        st.dataframe(d["training_windows_v1/spike_examples"],hide_index=True,width="stretch")
+        st.dataframe(d["training_windows_v1/fit_records"],hide_index=True,width="stretch")
+        st.dataframe(d["training_windows_v1/period_comparisons"],hide_index=True,width="stretch")
     st.subheader("Retrospective robustness · six periods pooled")
     st.caption(f"Scope: {len(d['robustness/product_metadata'])} fixed products selected before January 1, 2011; all four methods use the same observations.")
     st.caption("Lower WAPE is better; MAE is units per product-day, and positive bias means overprediction.")
@@ -192,5 +239,5 @@ with performance:
     st.caption("Sales proxy demand; the source cannot reveal lost sales or actual inventory. Later-2011 family selection and overlapping periods make robustness retrospective. Results are limited to high-volume cohorts and six historical windows.")
     with st.expander("Original validation evidence, frozen protocol and fit events"):
         st.dataframe(d["benchmark/validation_overall_metrics"], hide_index=True)
-        st.json(json.loads((ROOT / "protocols/robustness_v1.json").read_text()))
+        st.json(json.loads((ROOT / "protocols/robustness_v1.json").read_text(encoding="utf-8")))
         st.json(d["robustness/model_events"])

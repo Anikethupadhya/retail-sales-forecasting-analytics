@@ -1,0 +1,8 @@
+................                                                         [100%]
+============================== warnings summary ===============================
+..\environment\Lib\site-packages\_pytest\cacheprovider.py:469
+  C:\Users\anike\Retail-Demand-Forcasting\.verification-runs\20261001T000945Z-ab249fcb\environment\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\Users\anike\Retail-Demand-Forcasting\.verification-runs\20261001T000945Z-ab249fcb\workspace\.pytest_cache\v\cache\nodeids: [WinError 5] Access is denied: 'C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace\\pytest-cache-files-5u0ofabr' -> 'C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace\\.pytest_cache'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+16 passed, 1 warning in 7.65s

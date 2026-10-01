@@ -15,6 +15,7 @@ from src.metrics import score, reduction, summaries, comparisons
 
 
 from test_core import protocol
+from src.training_windows import validate_support, reconcile_reference, load_protocol
 
 @pytest.mark.integration
 def test_saved_outputs_reconcile(saved_sales_database):
@@ -52,3 +53,37 @@ def test_saved_outputs_reconcile(saved_sales_database):
     assert errors.error_reduction_units.sum()==pytest.approx(reconcile["net_absolute_error_reduction_units"])
     assert errors.share_of_model_absolute_error_pct.sum()==pytest.approx(100)
     assert errors.share_of_net_error_reduction_pct.sum()==pytest.approx(100)
+
+
+@pytest.mark.integration
+def test_training_window_saved_results_reconcile():
+    folder = OUT/"training_windows_v1"
+    p, checksum = load_protocol()
+    manifest = json.loads((folder/"experiment_manifest.json").read_text())
+    assert manifest["protocol_sha256"]==checksum
+    predictions = pd.read_csv(folder/"predictions.csv",dtype={"product_id":str},parse_dates=["date","origin","train_last_date","train_start"])
+    splits = make_robustness_splits(p, "2009-12-01", "2011-12-08")
+    validate_support(predictions,p["selected_product_ids"],splits)
+    assert len(predictions)==20160 and predictions.groupby("model").size().eq(3360).all()
+    assert predictions.prediction.ge(0).all() and predictions.train_last_date.eq(predictions.origin).all()
+    o, products = summaries(predictions)
+    saved = pd.read_csv(folder/"overall_metrics.csv").set_index("model")
+    for _, row in o.iterrows():
+        for metric in ["mae","wape","signed_bias","percentage_bias","absolute_error_sum","actual_units","mean_product_wape"]:
+            np.testing.assert_allclose(row[metric],saved.loc[row.model,metric],rtol=1e-10,atol=1e-8)
+    periods = pd.read_csv(folder/"period_metrics.csv")
+    for model, part in periods.groupby("model"):
+        np.testing.assert_allclose(100*part.absolute_error_sum.sum()/part.actual_units.sum(),saved.loc[model,"wape"],rtol=1e-10,atol=1e-8)
+    assert reconcile_reference(predictions,pd.read_csv(OUT/"robustness/predictions.csv",dtype={"product_id":str}))["status"]=="passed"
+    fits = pd.read_csv(folder/"fit_records.csv",dtype={"product_id":str})
+    assert len(fits)==720 and not fits.duplicated(["model","product_id","forecast_start"]).any()
+    for method, count in {"hw_182d":182,"hw_365d":365,"seasonal_naive":7,"weekday_mean_4w":28,"weekday_mean_8w":56}.items():
+        assert fits.loc[fits.model.eq(method),"training_observations"].eq(count).all()
+    assert ((pd.to_datetime(fits.forecast_start)-pd.to_datetime(fits.train_end)).dt.days==1).all()
+    events=json.loads((folder/"model_events.json").read_text())
+    assert len(events)==len(fits)
+    spikes=pd.read_csv(folder/"spike_summary.csv")
+    assert spikes.spike_product_days.nunique()==1
+    for _, row in spikes.iterrows():
+        part=predictions[predictions.model.eq(row.model)]
+        np.testing.assert_allclose(row.spike_absolute_error,(part.loc[part.is_spike,"prediction"]-part.loc[part.is_spike,"actual"]).abs().sum(),rtol=1e-10,atol=1e-8)

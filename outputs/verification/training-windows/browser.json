@@ -1,0 +1,16 @@
+{
+  "url": "http://localhost:8502",
+  "screenshots": 6,
+  "playwright_version": "1.62.1",
+  "browser_channel": "msedge",
+  "checks": [
+    "All-merchandise scope and source coverage",
+    "Existing corrected benchmark charts and product/cohort scope",
+    "Robustness experiment, November period and changed product",
+    "Training-window origin/product controls and all three saved smoothing curves",
+    "Model comparison, period curves and signed product contributions",
+    "Rendered shared spike, product contribution and fit-record diagnostics",
+    "Rendered product error tables and spike chart"
+  ],
+  "page_errors": []
+}

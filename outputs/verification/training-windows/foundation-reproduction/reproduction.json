@@ -1,0 +1,413 @@
+{
+  "run_id": "20261001T000945Z-ab249fcb",
+  "tested_implementation_commit": "c330d22855930481638a5339f8103e15b9cf5295",
+  "status": "passed",
+  "driver_python": "3.14.3",
+  "workspace": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace",
+  "environment": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\environment",
+  "evidence_directory": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\evidence",
+  "commands": [
+    {
+      "label": "clone",
+      "argv": [
+        "git",
+        "clone",
+        "--local",
+        "--no-hardlinks",
+        "C:\\Users\\anike\\Retail-Demand-Forcasting",
+        "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace"
+      ],
+      "cwd": "C:\\Users\\anike\\Retail-Demand-Forcasting",
+      "exit_status": 0,
+      "seconds": 2.76
+    },
+    {
+      "label": "checkout",
+      "argv": [
+        "git",
+        "checkout",
+        "--detach",
+        "c330d22855930481638a5339f8103e15b9cf5295"
+      ],
+      "cwd": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace",
+      "exit_status": 0,
+      "seconds": 0.367
+    },
+    {
+      "label": "create-environment",
+      "argv": [
+        "C:\\Users\\anike\\Retail-Demand-Forcasting\\.venv\\Scripts\\python.exe",
+        "-m",
+        "venv",
+        "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\environment"
+      ],
+      "cwd": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace",
+      "exit_status": 0,
+      "seconds": 21.447
+    },
+    {
+      "label": "install",
+      "argv": [
+        "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\environment\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "-r",
+        "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace\\requirements.txt"
+      ],
+      "cwd": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace",
+      "exit_status": 0,
+      "seconds": 333.356
+    },
+    {
+      "label": "pip-check",
+      "argv": [
+        "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\environment\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "cwd": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace",
+      "exit_status": 0,
+      "seconds": 1.521
+    },
+    {
+      "label": "pipeline",
+      "argv": [
+        "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\environment\\Scripts\\python.exe",
+        "-m",
+        "src.pipeline"
+      ],
+      "cwd": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace",
+      "exit_status": 0,
+      "seconds": 108.348
+    },
+    {
+      "label": "tests",
+      "argv": [
+        "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\environment\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\evidence\\tests.xml"
+      ],
+      "cwd": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace",
+      "exit_status": 0,
+      "seconds": 20.477
+    },
+    {
+      "label": "dashboard-smoke",
+      "argv": [
+        "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\environment\\Scripts\\python.exe",
+        "-c",
+        "from streamlit.testing.v1 import AppTest; a=AppTest.from_file('app.py').run(timeout=60); assert not a.exception; assert [t.label for t in a.tabs]==['Sales Overview','Forecast Evaluation','Model Performance']"
+      ],
+      "cwd": "C:\\Users\\anike\\Retail-Demand-Forcasting\\.verification-runs\\20261001T000945Z-ab249fcb\\workspace",
+      "exit_status": 0,
+      "seconds": 106.304
+    }
+  ],
+  "initial_processed_cache_files": 0,
+  "tolerances": {
+    "relative": 1e-10,
+    "forecast_metric_absolute": 1e-08,
+    "sales_gbp_absolute": 1e-06
+  },
+  "excluded_nondeterministic_metadata": [
+    "run_manifest.duration_seconds",
+    "experiment_manifest.duration_seconds",
+    "experiment_manifest.implementation_revision",
+    "experiment_manifest.source_checksums",
+    "Plotly HTML div IDs"
+  ],
+  "checkout_initial_status": "",
+  "source_checksums": {
+    "src/analytics.py": "8b960bdbf1f52c04aa9bac1bfc9a5701b10f0ff0b4589d4353ad73869c12c98e",
+    "src/cohort.py": "f9540915eb3adb48d36566426c08d8e8df862c872494712d4adb515a34fffdd0",
+    "src/common.py": "0ea558ef734f4619e632b80ae4389bb43305e9b801554ddcafe5b8998ad18f10",
+    "src/data.py": "0a680faebf50edad8ddfbe10299420572ae3faaaac21e4595f0f19e75eee0e9f",
+    "src/evidence.py": "375d0271de01db803d52793febd36b7c26696b209bdd6b46fc5fc6cb39d88a1d",
+    "src/forecast.py": "e454a9304cd6e679a1346f827a5e358d0b45cba6e0488f8bbbd5e3aafbd55366",
+    "src/metrics.py": "eacf778ef037326ca1a99e9be865cd5eadb2e6689d94de775e0e9683dd8117bc",
+    "src/pipeline.py": "05164f1f150be6e7cf95bad339a955f14d34cbd9ac962799a77e40e238b19fdc",
+    "src/report.py": "c9404df3e91c12d2bde2ec7b6430220479c9054d9b2646d4306e354fb4a7e263",
+    "src/__init__.py": "c5ce23be377f73bbbffc75419547e18e72719375479002ae3606506c4013ffe1",
+    "sql/comparable_growth.sql": "f26a2292ccf8ce83904f1c407cf00c4f2a3ac2824e00a761f77e18eeaac0e93d",
+    "sql/monthly_trends.sql": "cc3e0560e4ef1a67651175a8371618cff301dbab9b9a33a99cd3aeb0b79cbbfc",
+    "sql/product_rankings.sql": "6f357bd38dcee1d6debdc617a5da2e4bbdaef6ae77425ced60147ed666315bc6",
+    "sql/weekday_seasonality.sql": "3582c8cc868574f330b9d2c03b2c19a10f76c7c42b7d2ec9f5edc7a43e0bcc03",
+    "tests/conftest.py": "2e5df30e82ead45975ecb347006b586f89ececb6e9cf5db538d4a03e83bb8f51",
+    "tests/test_core.py": "c74ffb9cc1d2c96c4ed32402a8d8a77e280727033f761f3e5906da39e788c5e6",
+    "tests/test_dashboard.py": "43ca7388386c67baf54b30e70df4e48d1f6cee18a2985b1f761a4ae0e714a3c4",
+    "tests/test_saved_outputs.py": "d5e9621f2f65a78a69ccd48cd98c658cb902c8093c9a0b27078c875436bf54e7",
+    "scripts/capture_dashboard.cjs": "887dbd3ddc38601e260d7ff9cab70aa7cfd56ddae875dfda4468056c53860f4d",
+    "scripts/package_review.py": "149bd30b370894d5414f9dfb25bf855924253e2174fdea6faa49812bfcc1353d",
+    "scripts/verify_reproduction.py": "3e97d3950f09f4d1029aebc642f83b0a62d1309e071c1a7c02d0857c9cdb1804",
+    "protocols/robustness_v1.json": "32277d60050ee557cc4a99617034c3963f738eea2d776f74c952308e0857801f",
+    "protocols/robustness_v1.sha256": "2440ca0634b70fd4e2061ddcf585635d6189a07358c42d8a75062bceffd0b28a",
+    "protocols/training_windows_v1.json": "58368645b26b573f1dfb22163d60d2722b877f2ec550c2a25ecf45a448613461",
+    "protocols/training_windows_v1.sha256": "f7f8762e164bc56b62758992cc66b6b13e925c545ce796caa655c3bba914c274",
+    ".github/workflows/checks.yml": "daad832d8a9055aef0d7a85be18926bcc782ffcdede28207e2eae2ab018c3582",
+    "app.py": "82671140c8d9d446e22ca553d58434bfc310258829cb99ba8df3a69683ab1d5a",
+    "config.json": "835133f83f8ff2b71b44d9ee178ccdead1cb43e26c1e7f2c243c519d14acbff0",
+    "requirements.txt": "76196612a56769652850efadfa83eef24d70f55284d0c124d7e6798025fe5496",
+    ".gitattributes": "5049b16ecd5079f49bc6d1dfa2321e03c162b786a77cf3d6f4768bc6638fef49"
+  },
+  "copied_generated_outputs_removed": true,
+  "protected_checksums": {
+    "archives/implementation_before_sales_revision.zip": "707d13daf402ca05e1dd7c4ccb7dd5c43be4f1ebd3249717ed7448ea63170d25",
+    "archives/manifest.json": "d7745330129e2c0d99731bff4d2dcabcb68ff407e977bcc8ee1806f9a8488512",
+    "archives/benchmark_corrected/browser_smoke.json": "4ccd8bf17830d79b11bf93d56614bf3c4d2d9138c52826538a810e6438e7887c",
+    "archives/benchmark_corrected/config.json": "aa06771361730bf88492584c8a4a088fc0c39b2b7ad7425be88f02f66423cca0",
+    "archives/benchmark_corrected/correction_record.json": "4cb46465b5fea2b0962691acafb6969bc04ae7fa13e214326c03dbfb101e951a",
+    "archives/benchmark_corrected/daily_sales.csv": "a41b83c787f7eecfc3ff655652c0766cbffac2fefffcfbb9a19764ab3a9f3d23",
+    "archives/benchmark_corrected/data_audit.json": "11b7970eba21c6aac3a8406ef50b1b49a30b9d5bb7030884fc35bc2ab4f9555d",
+    "archives/benchmark_corrected/frozen_selection.json": "f270cc29058d6eb1c731a7f563816c8072b35757e4471fcbde8391811cd3caff",
+    "archives/benchmark_corrected/inventory_assumptions.csv": "57bfe52e920300d01d857d7d813c2c879b090467f5b5795909460113ce0c929d",
+    "archives/benchmark_corrected/inventory_scenario.csv": "5bad0afc9bb88a55cee2ca81670fc6545cbc610ea057a4c35c2dfbf5507bf521",
+    "archives/benchmark_corrected/model_events.json": "6c20172d174979d12d9847b8aa204b8be2b0733c5fd76416bb3cb47e247be5f8",
+    "archives/benchmark_corrected/product_eligibility.csv": "2d254d254432c3ca80c283e6e55090c21a6c3b9b45df6027614c80695a978072",
+    "archives/benchmark_corrected/product_metadata.csv": "372d7e8111493ba68595bc40d3d73e599638db09b4f664bd792fac1ec0da3861",
+    "archives/benchmark_corrected/requirements.txt": "24b2e20a3a81d226d0423995051cd2b24fdb4516b7392906b58c1ab448cf87bc",
+    "archives/benchmark_corrected/run_manifest.json": "288e95b28ed4c12400ae03396eff2fb6f77c2131cc7e601344b3985eabd5ab73",
+    "archives/benchmark_corrected/split_manifest.json": "916153f37396bd64a578c9a2c754d52dc3df990b36ec53f86aee18bb7549f3c4",
+    "archives/benchmark_corrected/sql_forecast_performance.csv": "98c764e53b7cc5d69d360dbd31337e3f1499601c7d8e07c7647236fcd6d5acf3",
+    "archives/benchmark_corrected/sql_sales_summary.csv": "fc18629f53614f06182373a4324cfa474276da53416651acc713c7fcc2d95e69",
+    "archives/benchmark_corrected/test-results.xml": "b557dec40936a7667ee0fec1dc09f0b39e6714dc082f832dfbd91b60a3260728",
+    "archives/benchmark_corrected/test_overall_metrics.csv": "5477349cdc0a9908ab1a1e8825d3be9f598f85df3b4cc60b31f74f45d0e5e8dc",
+    "archives/benchmark_corrected/test_predictions.csv": "08ee189da2cef9c6d7ba53de5eda56f6133b2901ce06c8a829f1e371f43bdf07",
+    "archives/benchmark_corrected/test_product_metrics.csv": "7c1e77dbe1718121f610d30c2870bd7fda206e83ffa49d14e2de2c9fd28881f4",
+    "archives/benchmark_corrected/validation_overall_metrics.csv": "99f6673899fabf7ec77d04b49aa4df1aa8c8dd42d11985ff3841ac35f8f06191",
+    "archives/benchmark_corrected/validation_predictions.csv": "6f9edb00dc0979e2bf79b895471032efb98728ba915ad39b121d9908033c36d2",
+    "archives/benchmark_corrected/validation_product_metrics.csv": "6fa390df332f13376e41ca318bd643dbd6e76c772d4aa0b22cfde35aa231808c",
+    "archives/benchmark_corrected/validation_window_metrics.csv": "22002be30aa95ca52fbdf7928362a9e78f33d38641dff53da8f7c892643e3414",
+    "archives/benchmark_corrected/verification.json": "7b5303f985e633d09ec26684a196e48361a3a27393fff8bf9000ad56d8a2efab",
+    "archives/benchmark_pre_correction/config.json": "aa06771361730bf88492584c8a4a088fc0c39b2b7ad7425be88f02f66423cca0",
+    "archives/benchmark_pre_correction/data_audit.json": "a0ebdd8f0cf9140b436b4b3edb0e6208cec38a80738c933d0699397d585080f8",
+    "archives/benchmark_pre_correction/frozen_selection.json": "bb69a12d85174c390ea7626017b7708ec225727a9f1cf8613fae11a1725191d9",
+    "archives/benchmark_pre_correction/inventory_assumptions.csv": "543d85e78b81086b762c6e6f2bdab028c9cf1a7de95b1983433e34999a9db00e",
+    "archives/benchmark_pre_correction/inventory_scenario.csv": "3d7a53c894e376cb318805cbdad581f49f5c47781d07ec38661f05cfbd6e916e",
+    "archives/benchmark_pre_correction/model_events.json": "8e6d3bb55a7efc652b373b15b30e3634a98aeb62f462d6390a75e9690afb83db",
+    "archives/benchmark_pre_correction/product_metadata.csv": "8a0aa52cb447c3bb34eb31534020ec8688fa662d1944467d17c2f5c75feebac3",
+    "archives/benchmark_pre_correction/requirements.txt": "24b2e20a3a81d226d0423995051cd2b24fdb4516b7392906b58c1ab448cf87bc",
+    "archives/benchmark_pre_correction/run_manifest.json": "d52b7183b5c95cd8ca396aa7470c2d577d7a0696abb7e85c7135fad84ff598f6",
+    "archives/benchmark_pre_correction/split_manifest.json": "916153f37396bd64a578c9a2c754d52dc3df990b36ec53f86aee18bb7549f3c4",
+    "archives/benchmark_pre_correction/sql_forecast_performance.csv": "8feeb54ce2973c492a28a8a613a95c619bf3a8ed27c5abf3adf5ef5e354c1dab",
+    "archives/benchmark_pre_correction/sql_sales_summary.csv": "824e81a02ba1001acc0c4d7e2a2a5c9341871c89e56b58567e2d06448f00526c",
+    "archives/benchmark_pre_correction/test_overall_metrics.csv": "79711ab1525c093003a390e9d33e489e00f543063862fe51f108253665ada5ba",
+    "archives/benchmark_pre_correction/test_predictions.csv": "c8e82593ffe2a4e2769e56a6bf58241a40871ea7323df6da6bcc2bb3675dcfaf",
+    "archives/benchmark_pre_correction/test_product_metrics.csv": "db69fc662a0e877745b54e3dea85e79fdef76eb0830cdcac298e3ba0fe650b15",
+    "archives/benchmark_pre_correction/validation_overall_metrics.csv": "731825346706fdd2ffb934fe33bce1c8d234a79ac3c1b9980a4a9189360dd66a",
+    "archives/benchmark_pre_correction/validation_predictions.csv": "97bd7471bf07652271aa4a238c68ec27e999718e22b5ee27f650649ac7caa561",
+    "archives/benchmark_pre_correction/validation_product_metrics.csv": "791def93ce112df9bcd947ea84b00e1668da62a5039422737ffdeb209e91dc03",
+    "archives/benchmark_pre_correction/validation_window_metrics.csv": "dcb3b5dc94664a0317e130661f6e493d3742de69383ac5ccc33e5916df5d1109",
+    "protocols/robustness_v1.json": "32277d60050ee557cc4a99617034c3963f738eea2d776f74c952308e0857801f",
+    "protocols/robustness_v1.sha256": "2440ca0634b70fd4e2061ddcf585635d6189a07358c42d8a75062bceffd0b28a",
+    "protocols/training_windows_v1.json": "58368645b26b573f1dfb22163d60d2722b877f2ec550c2a25ecf45a448613461",
+    "protocols/training_windows_v1.sha256": "f7f8762e164bc56b62758992cc66b6b13e925c545ce796caa655c3bba914c274"
+  },
+  "raw_acquisition": "Explicit copy of existing checksum-verified official UCI workbook",
+  "raw_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "environment_record": {
+    "project": "Retail Sales Forecasting & Analytics",
+    "completed": true,
+    "python": "3.14.3",
+    "packages": {
+      "pandas": "3.0.6",
+      "numpy": "2.5.3",
+      "duckdb": "1.5.6",
+      "statsmodels": "0.15.0",
+      "scipy": "1.18.1",
+      "plotly": "7.1.0",
+      "streamlit": "1.64.0",
+      "openpyxl": "3.1.5",
+      "pyarrow": "25.0.1",
+      "pytest": "9.1.1"
+    },
+    "raw_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+    "config_sha256": "835133f83f8ff2b71b44d9ee178ccdead1cb43e26c1e7f2c243c519d14acbff0",
+    "protocol_sha256": "32277d60050ee557cc4a99617034c3963f738eea2d776f74c952308e0857801f",
+    "historical_archive_files_verified": 45,
+    "duration_seconds": 87.05
+  },
+  "reconciled_csv_files": [
+    {
+      "path": "sales\\calendar.csv",
+      "keys": [
+        "date"
+      ]
+    },
+    {
+      "path": "sales\\comparable_growth.csv",
+      "keys": [
+        "year"
+      ]
+    },
+    {
+      "path": "sales\\daily_totals.csv",
+      "keys": [
+        "date"
+      ]
+    },
+    {
+      "path": "sales\\monthly_trends.csv",
+      "keys": [
+        "month_start"
+      ]
+    },
+    {
+      "path": "sales\\product_metadata.csv",
+      "keys": [
+        "product_id"
+      ]
+    },
+    {
+      "path": "sales\\product_rankings.csv",
+      "keys": [
+        "product_id"
+      ]
+    },
+    {
+      "path": "sales\\weekday_seasonality.csv",
+      "keys": [
+        "weekday_number"
+      ]
+    },
+    {
+      "path": "robustness\\baseline_comparisons.csv",
+      "keys": [
+        "model",
+        "baseline"
+      ]
+    },
+    {
+      "path": "robustness\\daily_sales.csv",
+      "keys": [
+        "product_id",
+        "date"
+      ]
+    },
+    {
+      "path": "robustness\\overall_metrics.csv",
+      "keys": [
+        "model"
+      ]
+    },
+    {
+      "path": "robustness\\period_comparisons.csv",
+      "keys": [
+        "model",
+        "baseline",
+        "forecast_start"
+      ]
+    },
+    {
+      "path": "robustness\\period_metrics.csv",
+      "keys": [
+        "model",
+        "forecast_start"
+      ]
+    },
+    {
+      "path": "robustness\\period_product_comparisons.csv",
+      "keys": [
+        "baseline",
+        "product_id",
+        "forecast_start"
+      ]
+    },
+    {
+      "path": "robustness\\period_product_metrics.csv",
+      "keys": [
+        "model",
+        "product_id",
+        "forecast_start"
+      ]
+    },
+    {
+      "path": "robustness\\predictions.csv",
+      "keys": [
+        "model",
+        "product_id",
+        "forecast_start",
+        "date"
+      ]
+    },
+    {
+      "path": "robustness\\product_comparisons.csv",
+      "keys": [
+        "baseline",
+        "product_id"
+      ]
+    },
+    {
+      "path": "robustness\\product_eligibility.csv",
+      "keys": [
+        "product_id"
+      ]
+    },
+    {
+      "path": "robustness\\product_metadata.csv",
+      "keys": [
+        "product_id"
+      ]
+    },
+    {
+      "path": "robustness\\product_metrics.csv",
+      "keys": [
+        "model",
+        "product_id"
+      ]
+    },
+    {
+      "path": "benchmark_analysis\\daily_errors.csv",
+      "keys": [
+        "model",
+        "product_id",
+        "date"
+      ]
+    },
+    {
+      "path": "benchmark_analysis\\largest_deteriorations.csv",
+      "keys": [
+        "model",
+        "product_id"
+      ]
+    },
+    {
+      "path": "benchmark_analysis\\largest_improvements.csv",
+      "keys": [
+        "model",
+        "product_id"
+      ]
+    },
+    {
+      "path": "benchmark_analysis\\overall_metrics.csv",
+      "keys": [
+        "model"
+      ]
+    },
+    {
+      "path": "benchmark_analysis\\product_error_analysis.csv",
+      "keys": [
+        "model",
+        "product_id"
+      ]
+    },
+    {
+      "path": "benchmark_analysis\\spike_summary.csv",
+      "keys": [
+        "model"
+      ]
+    },
+    {
+      "path": "benchmark_analysis\\spike_thresholds.csv",
+      "keys": [
+        "product_id"
+      ]
+    }
+  ],
+  "customer_free_parquet_reconciled": true,
+  "protected_artifacts_unchanged": true,
+  "duration_seconds": 3660.8
+}

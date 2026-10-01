@@ -1,0 +1,1 @@
+{"name":"retail-portfolio-browser-checks","private":true,"description":"Optional development-only rendered dashboard inspection","scripts":{"dashboard:check":"node scripts/capture_dashboard.cjs"},"devDependencies":{"playwright":"1.62.1"}}
