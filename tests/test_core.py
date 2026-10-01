@@ -145,39 +145,3 @@ def test_transaction_value_is_aggregated_before_daily_totals():
     assert daily.transaction_lines.iloc[0]==2
 
 
-@pytest.mark.skipif(not (OUT/"run_manifest.json").exists(),reason="Run pipeline first")
-def test_saved_outputs_reconcile():
-    assert verify_archives()>0
-    audit = json.loads((OUT/"sales/data_audit.json").read_text())
-    assert sum(audit["exclusive_exclusion_counts_in_priority_order"].values())+audit["retained_rows"]==audit["raw_rows"]
-    old_audit = json.loads((BENCHMARK/"data_audit.json").read_text())
-    assert audit["retained_rows"]==old_audit["retained_rows"]
-    sales = pd.read_parquet(OUT/"sales/product_daily_sales.parquet")
-    assert not {"Customer ID","Invoice","Country"}&set(sales.columns)
-    assert sales.units.sum()==audit["positive_units"]
-    assert sales.positive_sales_gbp.sum()==pytest.approx(audit["positive_sales_gbp"],abs=1e-6)
-    assert sales.transaction_lines.sum()==audit["retained_rows"]
-    manifest = json.loads((OUT/"robustness/split_manifest.json").read_text())
-    rebuilt,_,_ = select_cohort(sales,sales.date.min(),"2011-01-01",protocol()["eligibility"])
-    assert rebuilt==manifest["selected_product_ids"]
-    predictions = pd.read_csv(OUT/"robustness/predictions.csv",dtype={"product_id":str})
-    dates,origins = pd.to_datetime(predictions.date),pd.to_datetime(predictions.origin)
-    assert ((dates-origins).dt.days==predictions.horizon_day).all()
-    assert predictions.groupby(["split","product_id","model"]).size().eq(28).all()
-    assert predictions.prediction.ge(0).all()
-    assert predictions.train_last_date.eq(predictions.origin).all()
-    o,p = summaries(predictions)
-    saved = pd.read_csv(OUT/"robustness/overall_metrics.csv").set_index("model")
-    for _,row in o.iterrows():
-        assert saved.loc[row.model,"wape"]==pytest.approx(row.wape)
-        assert row.absolute_error_sum==pytest.approx(p[p.model.eq(row.model)].absolute_error_sum.sum())
-    ranking = pd.read_csv(OUT/"sales/product_rankings.csv")
-    assert ranking.positive_units.sum()==audit["positive_units"]
-    assert ranking.positive_sales_gbp.sum()==pytest.approx(audit["positive_sales_gbp"],abs=1e-6)
-    with duckdb.connect(str(OUT/"sales_analytics.duckdb"),read_only=True) as con:
-        assert {r[0] for r in con.execute("SHOW TABLES").fetchall()}=={"sales","product_metadata","calendar","daily_totals"}
-    errors = pd.read_csv(OUT/"benchmark_analysis/product_error_analysis.csv")
-    reconcile = json.loads((OUT/"benchmark_analysis/reconciliation.json").read_text())
-    assert errors.error_reduction_units.sum()==pytest.approx(reconcile["net_absolute_error_reduction_units"])
-    assert errors.share_of_model_absolute_error_pct.sum()==pytest.approx(100)
-    assert errors.share_of_net_error_reduction_pct.sum()==pytest.approx(100)

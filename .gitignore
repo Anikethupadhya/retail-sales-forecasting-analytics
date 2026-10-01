@@ -28,3 +28,6 @@ Thumbs.db
 
 # The immutable archives already preserve this historical output set.
 outputs/before_overlap_correction/
+
+.verification-runs/
+node_modules/

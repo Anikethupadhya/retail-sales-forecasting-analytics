@@ -4,7 +4,7 @@ from streamlit.testing.v1 import AppTest
 from src.common import ROOT, OUT
 
 
-@pytest.mark.skipif(not (OUT/"run_manifest.json").exists(),reason="Run pipeline first")
+@pytest.mark.dashboard
 def test_tabs_experiments_products_periods_and_scopes():
     app = AppTest.from_file(str(ROOT/"app.py")).run(timeout=60)
     assert len(app.exception)==0

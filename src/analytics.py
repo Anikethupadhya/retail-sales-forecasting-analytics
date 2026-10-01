@@ -5,12 +5,13 @@ import pandas as pd
 from .common import ROOT, OUT, save_json
 
 
-def build_sales_database(sales, metadata, calendar):
-    out = OUT / "sales"
+def build_sales_database(sales, metadata, calendar, *, database_path=None, output_dir=None):
+    out = output_dir if output_dir is not None else OUT / "sales"
+    out.mkdir(parents=True, exist_ok=True)
     totals = calendar[["date"]].merge(sales.groupby("date")[["units", "positive_sales_gbp", "transaction_lines"]].sum(), on="date", how="left").fillna(0)
     totals.to_csv(out / "daily_totals.csv", index=False)
     results = {}
-    with duckdb.connect(str(OUT / "sales_analytics.duckdb")) as con:
+    with duckdb.connect(str(database_path if database_path is not None else OUT / "sales_analytics.duckdb")) as con:
         for name, frame in [("sales", sales.drop(columns="description")), ("product_metadata", metadata), ("calendar", calendar), ("daily_totals", totals)]:
             con.register("input_frame", frame)
             con.execute(f"CREATE OR REPLACE TABLE {name} AS SELECT * FROM input_frame")
