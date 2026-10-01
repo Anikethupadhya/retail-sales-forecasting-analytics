@@ -1,5 +1,10 @@
 # Training-window experiment
 
+The frozen design and measured retrospective outcomes are generated from saved evidence.
+
+<!-- generated:training-window-report:start -->
+## Training-window experiment
+
 The best observed smoothing history was `hw_182d` at **103.976880% pooled WAPE**, versus **104.519041%** with expanding history. This is a **0.518720% relative reduction** (0.542161 percentage points), winning in **2/6 periods** and **9/20 products** across combined periods. The strongest baseline remains `weekday_mean_4w` at **103.558688%**, below every smoothing variant. A shorter history produced a small pooled improvement, with mixed period/product results; it does not establish a generally superior model.
 
 ## Fixed design and provenance
@@ -122,3 +127,4 @@ Observed sales proxy demand; lost sales, inventory and promotions are unavailabl
 All new results live in outputs/training_windows_v1/: predictions.csv; fit_records.csv; model_events.json; overall_metrics.csv; product_metrics.csv; period_metrics.csv; period_product_metrics.csv; pairwise_comparisons.csv; product_comparisons.csv; period_comparisons.csv; period_product_comparisons.csv; product_contributions.csv; spike_thresholds.csv; spike_summary.csv; spike_examples.csv; reference_reconciliation.json; experiment_manifest.json.
 
 The dashboard loads these saved results without fitting models. Forecast Evaluation exposes the experiment, product, origin, smoothing histories and named baselines. Model Performance shows pooled/period outcomes and expandable diagnostics. [Reproduction instructions](setup-and-reproduction.md) distinguish fast CI from full raw-data execution.
+<!-- generated:training-window-report:end -->

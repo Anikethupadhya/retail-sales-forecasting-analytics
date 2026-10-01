@@ -22,3 +22,17 @@ Old evidence and immutable artifacts are preserved. Evidence paths below outputs
 CI repair: d56f8e8 Linux integration failed because immutable archive manifest keys contain Windows backslashes. Preserve the original manifest and resolve its keys portably using PureWindowsPath. A deterministic regression checks unchanged hashes and rejects altered bytes. This requires a new final implementation revision and fresh full verification.
 
 Final clean run: 20261001T013753Z-96cc59ac, implementation 45d64ba3fcc24494308aef5812ac6cf216ce6dc9, 925.6 seconds. Commands all exit zero. Final execution metadata replaces the initial development manifest after source/input hash checks; numerical results are unchanged. Only evidence/report/provenance files change after the tested implementation. No blockers remain for local implementation; final external check outcomes are captured before handoff.
+
+## Portfolio presentation phase
+
+Starting revision: 8af778c01ba8a2bda40625db62bfe05629a8a8f6. Local/remote heads matched after fetch; PR #1 open/draft into unchanged main; private visibility verified. Baseline hashes and previous review package preserved. Earlier verification remains evidence of the earlier phase.
+
+| Requirement | Existing implementation | Actual gap | Necessary change | Verification |
+| --- | --- | --- | --- | --- |
+| Report ownership | Main writer replaces README; secondary appends | Maintained prose is overwritten / direct repeats duplicate sections | Bounded sections and temporary-root regression | Pending |
+| Findings | Three correct SQL findings | Limited formula/denominator metadata | Extend authoritative artifact and shared interpreter | Pending |
+| README/interview/resume | Technical narrative and smoothing-focused bullet | Recruiter explanation and winning-method claim | Maintained README and generated evidence | Pending |
+| Dashboard/walkthrough | Three tabs and saved controls | Start guidance and reproducible illustrative examples | Shared manifest and selector shortcuts | Pending |
+| Quick demonstration | Saved-output application | Fresh-checkout proof before raw-data rebuild | Raw/database-free smoke evidence | Pending |
+| Exact verification/package | Prior-phase guards and evidence | Bind to this phase | New run evidence and current provenance | Pending |
+| Push/PR/review | Existing pushed branch and draft PR | Updated final review | Real commits, latest-head checks, merge instructions | Pending |

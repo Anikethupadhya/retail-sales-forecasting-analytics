@@ -1,0 +1,17 @@
+{
+  "number": 1,
+  "html_url": "https://github.com/Anikethupadhya/retail-sales-forecasting-analytics/pull/1",
+  "state": "open",
+  "draft": true,
+  "title": "Make portfolio reproducible and evaluate fixed training histories",
+  "mergeable": true,
+  "head": {
+    "ref": "feature/reproducible-training-windows",
+    "sha": "8af778c01ba8a2bda40625db62bfe05629a8a8f6"
+  },
+  "base": {
+    "ref": "main",
+    "sha": "d18fc1fe20c3ed6b766b515694886ca01c696286"
+  },
+  "observed_at_utc": "2026-10-01T05:41:47.221707+00:00"
+}

@@ -3,9 +3,11 @@ import json
 import pandas as pd
 from .common import ROOT, OUT
 from .report import markdown_table
+from .documents import update_section
 
 
-def generate():
+def generate(*, root=ROOT, outputs=OUT):
+    OUT = outputs
     folder = OUT/"training_windows_v1"
     read = lambda n: pd.read_csv(folder/f"{n}.csv", dtype={"product_id": str})
     overall = read("overall_metrics")
@@ -26,7 +28,7 @@ def generate():
     if main is not None:
         conclusion += f" This is a **{main.relative_wape_reduction_pct:.6f}% relative reduction** ({by.loc['hw_expanding','wape']-winner.wape:.6f} percentage points), winning in **{int(matched.relative_wape_reduction_pct.gt(0).sum())}/6 periods** and **{int(main.wins)}/20 products** across combined periods."
     conclusion += f" The strongest baseline remains `{best_baseline.model}` at **{best_baseline.wape:.6f}%**, below every smoothing variant. A shorter history produced a small pooled improvement, with mixed period/product results; it does not establish a generally superior model."
-    text = f'''# Training-window experiment
+    text = f'''## Training-window experiment
 
 {conclusion}
 
@@ -96,28 +98,10 @@ All new results live in outputs/training_windows_v1/: predictions.csv; fit_recor
 
 The dashboard loads these saved results without fitting models. Forecast Evaluation exposes the experiment, product, origin, smoothing histories and named baselines. Model Performance shows pooled/period outcomes and expandable diagnostics. [Reproduction instructions](setup-and-reproduction.md) distinguish fast CI from full raw-data execution.
 '''
-    (ROOT/"docs/training-window-experiment.md").write_text(text,encoding="utf-8",newline="\n")
-    readme = ROOT/"README.md"
-    s=readme.read_text(encoding="utf-8").replace("## Limitations and one next experiment", "## Limitations and future work")
-    section=f"\n## Training-window experiment\n\n{conclusion}\n\nSame 20 products, six periods, 28 days and weekly model; six methods and 20,160 prediction rows. [Full experiment, contributions and limitations](docs/training-window-experiment.md). [Repeatable clean verification and CI](docs/setup-and-reproduction.md).\n\n![Training-window forecast inspection](docs/screenshots/forecast-training-windows.png)\n"
-    s=s.replace("## Measured results",section+"\n## Measured results",1)
-    s=s.replace("The historical benchmark is loaded and reconciled, not retrained.","The historical benchmark is loaded and reconciled, not retrained. The same command also executes the committed expanding/182/365-day experiment and reconciles its expanding forecasts and baselines.")
-    readme.write_text(s,encoding="utf-8",newline="\n")
-    path=ROOT/"docs/error-analysis.md"
-    path.write_text(path.read_text(encoding="utf-8")+f"\n## Training-window diagnostics\n\n{conclusion}\n\n[Full window analysis](training-window-experiment.md) includes shared spike labels, high-volume contributions, signed bias and fit status. Historical benchmark diagnostics above retain their original threshold and scope.\n",encoding="utf-8",newline="\n")
-    path=ROOT/"docs/resume-evidence.md"
-    path.write_text(path.read_text(encoding="utf-8")+f'''\n## Training-window claim mapping
-
-| Claim | Artifact and exact field |
-| --- | --- |
-| Six methods | outputs/training_windows_v1/overall_metrics.csv: six distinct model rows |
-| Six origins, 28 days, 20 products | protocols/training_windows_v1.json: forecast_start_dates, horizon_days, selected_product_ids |
-| 20,160 predictions, 3,360 per method | predictions.csv row count; experiment_manifest.json: prediction_rows, rows_per_method |
-| Best smoothing {winner.model}: {winner.wape:.12f}% WAPE | overall_metrics.csv: model={winner.model}, wape |
-| Expanding smoothing: {by.loc['hw_expanding','wape']:.12f}% | overall_metrics.csv: model=hw_expanding, wape |
-| Strongest overall baseline: {best_baseline.wape:.12f}% | overall_metrics.csv: model={best_baseline.model}, wape |
-
-The proposed forecasting bullet reports the six-period pooled experiment. It does not claim that smoothing outperformed the strongest baseline. Raw-row count and the three dashboard tabs refer to the real-sales foundation, not an expanded forecasting cohort. Verified environments, tests and exact tested revisions are recorded under outputs/verification/training-windows/.\n''',encoding="utf-8",newline="\n")
+    update_section(root/"docs/training-window-experiment.md", "training-window-report", text, title="Training-window experiment")
+    update_section(root/"docs/error-analysis.md", "training-window-diagnostics",
+                   f"## Training-window diagnostics\n\n{conclusion}\n\n[Full window analysis](training-window-experiment.md) includes shared spike labels, high-volume contributions, signed bias and fit status. Historical benchmark diagnostics retain their original threshold and scope.",
+                   title="Forecast error analysis")
 
 
 if __name__ == "__main__":
