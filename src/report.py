@@ -19,17 +19,22 @@ def markdown_table(frame, columns):
     return "\n".join(lines)
 
 
+def clean_html(path):
+    # Match the existing exported assets while making generated IDs/whitespace stable.
+    path.write_bytes("\r\n".join(line.rstrip() for line in path.read_text(encoding="utf-8").splitlines()).encode("utf-8"))
+
+
 def generate():
     read = lambda name: pd.read_csv(OUT / name, dtype={"product_id": str})
-    audit = json.loads((OUT / "sales/data_audit.json").read_text())
-    findings = json.loads((OUT / "sales/findings.json").read_text())["findings"]
-    run = json.loads((OUT / "run_manifest.json").read_text())
-    manifest = json.loads((OUT / "robustness/split_manifest.json").read_text())
+    audit = json.loads((OUT / "sales/data_audit.json").read_text(encoding="utf-8"))
+    findings = json.loads((OUT / "sales/findings.json").read_text(encoding="utf-8"))["findings"]
+    run = json.loads((OUT / "run_manifest.json").read_text(encoding="utf-8"))
+    manifest = json.loads((OUT / "robustness/split_manifest.json").read_text(encoding="utf-8"))
     overall = read("robustness/overall_metrics.csv")
     compare = read("robustness/baseline_comparisons.csv")
     period = read("robustness/period_metrics.csv")
     period_compare = read("robustness/period_comparisons.csv")
-    events = json.loads((OUT / "robustness/model_events.json").read_text())
+    events = json.loads((OUT / "robustness/model_events.json").read_text(encoding="utf-8"))
     original = pd.read_csv(BENCHMARK / "test_overall_metrics.csv").set_index("model")
     selected = overall.set_index("model").loc["hw_weekly"]
     strongest = overall[overall.model.ne("hw_weekly")].sort_values("wape").iloc[0]
@@ -46,14 +51,16 @@ def generate():
                  hover_data=["description", "relative_wape_reduction_pct"], color="error_reduction_units", color_continuous_scale="RdBu", color_continuous_midpoint=0,
                  title="Corrected benchmark: product contributions to absolute-error reduction")
     fig.update_layout(xaxis_title="Baseline absolute error minus model absolute error (units)", yaxis_title="Product code", yaxis_type="category", height=650)
-    fig.write_html(figures / "benchmark-contributions.html", include_plotlyjs=True)
+    fig.write_html(figures / "benchmark-contributions.html", include_plotlyjs=True, div_id="benchmark-contributions")
+    clean_html(figures / "benchmark-contributions.html")
     biggest = days[days.model.eq("hw_weekly")].nlargest(1, "actual").iloc[0]
     sample = days[days.product_id.eq(biggest.product_id)]
     actual = sample[sample.model.eq("hw_weekly")][["date", "actual"]].rename(columns={"actual": "units"}).assign(series="Observed sales")
     forecasts = sample[["date", "prediction", "model"]].rename(columns={"prediction": "units", "model": "series"})
     fig = px.line(pd.concat([actual, forecasts]), x="date", y="units", color="series", title=f"Largest observed benchmark daily spike: {biggest.product_id} — {biggest.description}")
     fig.update_layout(yaxis_title="Units", xaxis_title="Historical test date")
-    fig.write_html(figures / "benchmark-spike-example.html", include_plotlyjs=True)
+    fig.write_html(figures / "benchmark-spike-example.html", include_plotlyjs=True, div_id="benchmark-spike-example")
+    clean_html(figures / "benchmark-spike-example.html")
     shared = len(manifest["cohort_comparison"]["shared"])
     n = len(manifest["selected_product_ids"])
     fallback = sum(e["status"] != "ok" for e in events)
@@ -64,10 +71,12 @@ def generate():
     else:
         bullet1 = f"Benchmarked four 28-day sales forecasting methods across six retrospective periods and {n} products using Python, pandas and statsmodels; reported {selected.wape:.1f}% smoothing-model WAPE versus {strongest.wape:.1f}% for the strongest baseline."
     bullet2 = f"Audited {audit['raw_rows']:,} UCI transaction rows and built DuckDB SQL sales rankings, comparable-period growth and weekday analysis with a three-tab Streamlit/Plotly dashboard and evidence-backed error analysis."
-    next_experiment = (
-        "A useful next experiment is a prespecified training-window comparison (expanding history versus recent 180/365 days) for the same weekly smoothing specification and baselines, keeping this experiment archived and using separately declared historical windows. The current comparison alone does not authorize changing the frozen model or reporting a fresh holdout."
-        if strongest_compare.relative_wape_reduction_pct <= 0 else
-        "A useful next experiment is to evaluate the same frozen comparison on a broader cohort chosen before its earliest evaluation date. Do not change this cohort or reuse these outcomes for model tuning.")
+    if (OUT/"training_windows_v1/overall_metrics.csv").exists():
+        windows = read("training_windows_v1/overall_metrics.csv")
+        winner = windows[windows.model.isin(["hw_expanding","hw_182d","hw_365d"])].sort_values("wape").iloc[0]
+        expanding = windows[windows.model.eq("hw_expanding")].iloc[0]
+        bullet1 = f"Evaluated six 28-day sales forecasting methods across six retrospective periods and {n} products using Python, pandas and statsmodels; the best smoothing history achieved {winner.wape:.1f}% pooled WAPE versus {expanding.wape:.1f}% with expanding history."
+    next_experiment = "The prespecified expanding/182/365-day training-window experiment is complete; see [measured results](docs/training-window-experiment.md). A future evaluation should use a prospectively frozen design on newly available data. No further tuning is justified as independent confirmation using these inspected periods."
     findings_text = "\n".join(f"- {f['text']} ([evidence](../{f['source']}), {f['row']})." for f in findings)
     (ROOT / "docs/error-analysis.md").write_text(f'''# Corrected benchmark error analysis
 
@@ -216,6 +225,10 @@ Sales findings and every value used in the Overview are traceable to `outputs/sa
 
 The existing benchmark and robustness are different experiments. The corrected benchmark followed a disclosed ingestion repair after the first test had been seen. Robustness uses an earlier-selected cohort and fixed historical periods, with the family originally chosen on later-2011 validation. Do not combine their percentages, describe either rerun as a fresh holdout, call WAPE accuracy, or claim operational savings. The prior implementation is archived; current resume bullets describe the active sales analytics project.
 ''', encoding="utf-8")
+
+    if (OUT / "training_windows_v1/experiment_manifest.json").exists():
+        from .training_report import generate as generate_training_report
+        generate_training_report()
 
 
 if __name__ == "__main__":

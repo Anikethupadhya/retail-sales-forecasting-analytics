@@ -113,3 +113,17 @@ one year do not demonstrate future or universal performance. There are no actual
 inventory observations, lost-sales labels, promotions or calibrated intervals.
 The next experiment is proposed in the README from the measured results; this
 project does not add extra models or retune the frozen comparison.
+
+## Training-window experiment interview notes
+
+The question was whether old history hurt the existing weekly smoothing model. I froze expanding, trailing 182 days (26 weeks), and trailing 365 days before execution. I kept the same 20 products, six origins, 28-day horizons, observed-sales target, model settings, clipping and last-week fallback. The three baselines kept their own 7/28/56-day histories.
+
+The 182-day history reached 103.976880% pooled WAPE versus 104.519041% expanding, a 0.518720% relative reduction. It improved 2/6 periods and 9/20 combined-product comparisons. The 365-day history was worse at 107.652765%. The 4-week weekday baseline remained best at 103.558688%, so I would not claim that exponential smoothing was the strongest model. Near-zero average bias did not mean small absolute errors.
+
+All six methods had identical 3,360-row support, or 20,160 predictions in total. Expanding and unchanged baselines reconciled against prior results. Shared preorigin expanding-history spike thresholds prevented different windows from labeling different observations. Every spike and fallback would stay in primary scores; this real run needed no fallback.
+
+The family had been selected on later-2011 validation. These historical windows overlap inspected evaluations, so this is retrospective analysis rather than a fresh holdout. The original corrected benchmark is a separate cohort and disclosed ingestion repair; I do not blend its stronger score with these results.
+
+Engineering evidence includes fresh committed clones, new environments, empty caches, raw checksum verification, rebuilt DuckDB SQL, numerical reconciliation, leakage/failure fixtures, saved-output integration and dashboard checks. Fast CI uses customer-free aggregates and temporary databases, while full reproduction actually reads the official workbook. Meaningful commits record completed milestones; a pushed feature branch and draft PR keep main available for review.
+
+See training-window-experiment.md for artifacts, contributions, limitations and exact result fields. No financial savings, inventory improvement, promotion cause or demand lost during stock-outs is supported by these records.

@@ -1,0 +1,81 @@
+{
+  "experiment": "training_windows_v1",
+  "protocol_commit": "c330d22855930481638a5339f8103e15b9cf5295",
+  "protocol_sha256": "58368645b26b573f1dfb22163d60d2722b877f2ec550c2a25ecf45a448613461",
+  "implementation_revision": "4169350ef8303bf0ba5106dd1d0a069c565defab",
+  "implementation_inputs_dirty_before_execution": true,
+  "selected_product_ids": [
+    "21212",
+    "85123A",
+    "84077",
+    "85099B",
+    "17003",
+    "84879",
+    "84991",
+    "22197",
+    "21977",
+    "21232",
+    "21213",
+    "21982",
+    "21980",
+    "84755",
+    "84347",
+    "84992",
+    "21984",
+    "20725",
+    "21981",
+    "15036"
+  ],
+  "forecast_start_dates": [
+    "2011-01-01",
+    "2011-03-01",
+    "2011-05-01",
+    "2011-07-01",
+    "2011-09-01",
+    "2011-11-01"
+  ],
+  "rows_per_method": 3360,
+  "prediction_rows": 20160,
+  "source_checksums": {
+    "src/analytics.py": "8b960bdbf1f52c04aa9bac1bfc9a5701b10f0ff0b4589d4353ad73869c12c98e",
+    "src/cohort.py": "f9540915eb3adb48d36566426c08d8e8df862c872494712d4adb515a34fffdd0",
+    "src/common.py": "0ea558ef734f4619e632b80ae4389bb43305e9b801554ddcafe5b8998ad18f10",
+    "src/data.py": "0a680faebf50edad8ddfbe10299420572ae3faaaac21e4595f0f19e75eee0e9f",
+    "src/evidence.py": "375d0271de01db803d52793febd36b7c26696b209bdd6b46fc5fc6cb39d88a1d",
+    "src/forecast.py": "e454a9304cd6e679a1346f827a5e358d0b45cba6e0488f8bbbd5e3aafbd55366",
+    "src/metrics.py": "eacf778ef037326ca1a99e9be865cd5eadb2e6689d94de775e0e9683dd8117bc",
+    "src/pipeline.py": "05164f1f150be6e7cf95bad339a955f14d34cbd9ac962799a77e40e238b19fdc",
+    "src/report.py": "c9404df3e91c12d2bde2ec7b6430220479c9054d9b2646d4306e354fb4a7e263",
+    "src/training_windows.py": "94a54f9ff5e356cb2ea878d03f53ce799e0c482af096e9f82d9d728606c5d140",
+    "src/__init__.py": "c5ce23be377f73bbbffc75419547e18e72719375479002ae3606506c4013ffe1",
+    "sql/comparable_growth.sql": "f26a2292ccf8ce83904f1c407cf00c4f2a3ac2824e00a761f77e18eeaac0e93d",
+    "sql/monthly_trends.sql": "cc3e0560e4ef1a67651175a8371618cff301dbab9b9a33a99cd3aeb0b79cbbfc",
+    "sql/product_rankings.sql": "6f357bd38dcee1d6debdc617a5da2e4bbdaef6ae77425ced60147ed666315bc6",
+    "sql/weekday_seasonality.sql": "3582c8cc868574f330b9d2c03b2c19a10f76c7c42b7d2ec9f5edc7a43e0bcc03",
+    "protocols/robustness_v1.json": "32277d60050ee557cc4a99617034c3963f738eea2d776f74c952308e0857801f",
+    "protocols/robustness_v1.sha256": "2440ca0634b70fd4e2061ddcf585635d6189a07358c42d8a75062bceffd0b28a",
+    "protocols/training_windows_v1.json": "58368645b26b573f1dfb22163d60d2722b877f2ec550c2a25ecf45a448613461",
+    "protocols/training_windows_v1.sha256": "f7f8762e164bc56b62758992cc66b6b13e925c545ce796caa655c3bba914c274"
+  },
+  "input_checksums": {
+    "robustness/daily_sales.csv": "e1cce62178ad0a7696189fdada5d893ab5af30a340a6113f3fce35df1af0bd15",
+    "robustness/split_manifest.json": "1bb1e9aa9d95caa87b85d57e672931623942ece30745fa2487460665b471c5d3",
+    "robustness/predictions.csv": "d2c49630358ab11706e898ed81ffac0a2aad77329518023fbdaff2c4358e6b6e"
+  },
+  "raw_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "python": "3.14.3",
+  "packages": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "statsmodels": "0.15.0",
+    "scipy": "1.18.1"
+  },
+  "duration_seconds": 37.873,
+  "limitations": [
+    "hw_weekly was selected using later-2011 validation; earlier windows are retrospective stress tests of that specification.",
+    "September and November windows overlap existing evaluations. Results are not independent confirmation or a fresh untouched holdout.",
+    "Compare methods within the same fixed cohort; cohort differences prevent attributing cross-experiment differences solely to models.",
+    "Observed positive sales do not reveal actual inventory or lost demand. No additional models or date changes after inspecting outcomes.",
+    "Six historical periods describe stability without statistical significance. No models, dates, eligibility or settings change after outcomes are inspected."
+  ]
+}

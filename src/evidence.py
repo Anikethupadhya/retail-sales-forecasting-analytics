@@ -13,7 +13,7 @@ BENCHMARK = ARCHIVE / "benchmark_corrected"
 
 
 def verify_archives():
-    manifest = json.loads((ARCHIVE / "manifest.json").read_text())
+    manifest = json.loads((ARCHIVE / "manifest.json").read_text(encoding="utf-8"))
     for path, expected in manifest["archive_files"].items():
         if hashlib.sha256((ARCHIVE / path).read_bytes()).hexdigest() != expected:
             raise ValueError(f"Historical archive changed: {path}")

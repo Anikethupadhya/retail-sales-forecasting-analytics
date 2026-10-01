@@ -60,7 +60,7 @@ def prepare_sales(cfg):
     if cache.exists() and info_path.exists():
         import json
         raw = pd.read_parquet(cache)
-        sheet_info = json.loads(info_path.read_text())
+        sheet_info = json.loads(info_path.read_text(encoding="utf-8"))
     else:
         sheets = pd.read_excel(path, sheet_name=None, engine="openpyxl")
         sheet_info = []

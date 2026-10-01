@@ -2,6 +2,15 @@
 
 A reproducible portfolio project using real historical transactions, customer-free merchandise aggregates, meaningful DuckDB SQL, fixed-origin forecasting comparisons, and a three-tab Streamlit/Plotly dashboard. Forecasts describe **observed positive sales**. Actual inventory and lost demand are unavailable.
 
+
+## Training-window experiment
+
+The best observed smoothing history was `hw_182d` at **103.976880% pooled WAPE**, versus **104.519041%** with expanding history. This is a **0.518720% relative reduction** (0.542161 percentage points), winning in **2/6 periods** and **9/20 products** across combined periods. The strongest baseline remains `weekday_mean_4w` at **103.558688%**, below every smoothing variant. A shorter history produced a small pooled improvement, with mixed period/product results; it does not establish a generally superior model.
+
+Same 20 products, six periods, 28 days and weekly model; six methods and 20,160 prediction rows. [Full experiment, contributions and limitations](docs/training-window-experiment.md). [Repeatable clean verification and CI](docs/setup-and-reproduction.md).
+
+![Training-window forecast inspection](docs/screenshots/forecast-training-windows.png)
+
 ## Measured results
 
 All-merchandise coverage: **2009-12-01 to 2011-12-08**, 1,067,371 raw rows across both workbook sheets; **1,013,327 retained merchandise lines**, **4,706 products**, **11,127,702 positive units**, and **£19,501,670.71 positive-sales value**. Value is transaction-level Quantity × Price summed before aggregation; it is not net revenue or profit. All countries are pooled.
@@ -39,7 +48,7 @@ python -m venv .venv
 .\.venv\Scripts\python -m streamlit run app.py --server.headless true --browser.gatherUsageStats false
 ```
 
-**Full analysis command: `python -m src.pipeline`** using the installed environment. It audits the workbook, builds sales SQL outputs, reconciles and explains saved benchmark predictions, evaluates the frozen robustness protocol, and regenerates documentation from measured outputs. The historical benchmark is loaded and reconciled, not retrained. The dashboard loads saved aggregates and predictions and does not fit models. Open http://localhost:8501. Rebuild the ignored DuckDB binary by running the pipeline.
+**Full analysis command: `python -m src.pipeline`** using the installed environment. It audits the workbook, builds sales SQL outputs, reconciles and explains saved benchmark predictions, evaluates the frozen robustness protocol, and regenerates documentation from measured outputs. The historical benchmark is loaded and reconciled, not retrained. The same command also executes the committed expanding/182/365-day experiment and reconciles its expanding forecasts and baselines. The dashboard loads saved aggregates and predictions and does not fit models. Open http://localhost:8501. Rebuild the ignored DuckDB binary by running the pipeline.
 
 Original data: [Chen, D. (2012), Online Retail II, UCI](https://archive.ics.uci.edu/dataset/502/online+retail+ii), [DOI:10.24432/C5CG6D](https://doi.org/10.24432/C5CG6D), CC BY 4.0. Raw workbook: `data/raw/online_retail_II.xlsx`; SHA-256 `bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980`. [Manual download instructions](docs/data-download.md) are available if official acquisition fails. Raw data, local workbook caches and database binaries stay outside Git and the review ZIP.
 
@@ -90,15 +99,15 @@ Tests cover chronology, future-information perturbations, weekday-baseline arith
 
 Folders: `src/` analysis modules; `sql/` standalone queries; `protocols/` frozen experiment; `archives/` immutable historical evidence; `outputs/sales/`, `outputs/robustness/`, `outputs/benchmark_analysis/` separate results; `docs/` explanations, evidence and screenshots. `scripts/package_review.py` creates an allowlisted review ZIP and manifest, excluding raw/customer-level extracts, environments, caches and database binaries. [Version control and portfolio evidence](docs/version-control.md) explains the private repository, backup scope, and workflow for recording future improvements.
 
-## Limitations and one next experiment
+## Limitations and future work
 
 Sales proxy demand; actual inventory, lost sales and promotions are unavailable. Calendar zeros cannot distinguish closures, absent records or stock-outs. Merchandise-code and price rules can exclude unconventional valid records. Bulk-order spikes remain. Six non-overlapping robustness windows in one year do not demonstrate universal or future performance. No prediction intervals are supplied. Cohorts are high-volume subsets, not the full catalogue.
 
-A useful next experiment is a prespecified training-window comparison (expanding history versus recent 180/365 days) for the same weekly smoothing specification and baselines, keeping this experiment archived and using separately declared historical windows. The current comparison alone does not authorize changing the frozen model or reporting a fresh holdout.
+The prespecified expanding/182/365-day training-window experiment is complete; see [measured results](docs/training-window-experiment.md). A future evaluation should use a prospectively frozen design on newly available data. No further tuning is justified as independent confirmation using these inspected periods.
 
 ## Proposed resume entry
 
-- Benchmarked four 28-day sales forecasting methods across six retrospective periods and 20 products using Python, pandas and statsmodels; reported 104.5% smoothing-model WAPE versus 103.6% for the strongest baseline.
+- Evaluated six 28-day sales forecasting methods across six retrospective periods and 20 products using Python, pandas and statsmodels; the best smoothing history achieved 104.0% pooled WAPE versus 104.5% with expanding history.
 - Audited 1,067,371 UCI transaction rows and built DuckDB SQL sales rankings, comparable-period growth and weekday analysis with a three-tab Streamlit/Plotly dashboard and evidence-backed error analysis.
 
 [Numerical claim evidence](docs/resume-evidence.md) separates existing corrected benchmark claims from retrospective robustness outcomes. [Interview guide](docs/interview-guide.md) explains the methods and limitations.

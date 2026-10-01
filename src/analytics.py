@@ -20,7 +20,7 @@ def build_sales_database(sales, metadata, calendar, *, database_path=None, outpu
         for name in ["inventory_assumptions", "forecasts", "daily_sales"]:
             con.execute(f"DROP TABLE IF EXISTS {name}")
         for name in ["product_rankings", "monthly_trends", "weekday_seasonality", "comparable_growth"]:
-            results[name] = con.execute((ROOT / f"sql/{name}.sql").read_text()).df()
+            results[name] = con.execute((ROOT / f"sql/{name}.sql").read_text(encoding="utf-8")).df()
             results[name].to_csv(out / f"{name}.csv", index=False)
     growth = results["comparable_growth"].iloc[-1]
     leader = results["product_rankings"].sort_values(["value_rank", "product_id"]).iloc[0]

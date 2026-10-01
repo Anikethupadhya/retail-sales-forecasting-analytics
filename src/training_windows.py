@@ -21,10 +21,10 @@ WINDOWS = {"hw_expanding": None, "hw_182d": 182, "hw_365d": 365}
 def load_protocol():
     path = ROOT / "protocols/training_windows_v1.json"
     checksum = hashlib.sha256(path.read_bytes()).hexdigest()
-    if checksum != path.with_suffix(".sha256").read_text().strip():
+    if checksum != path.with_suffix(".sha256").read_text(encoding="utf-8").strip():
         raise ValueError("Training-window protocol checksum mismatch")
-    p = json.loads(path.read_text())
-    old = json.loads((ROOT/"protocols/robustness_v1.json").read_text())
+    p = json.loads(path.read_text(encoding="utf-8"))
+    old = json.loads((ROOT/"protocols/robustness_v1.json").read_text(encoding="utf-8"))
     for key in ["forecast_start_dates", "horizon_days", "eligibility", "selection_cutoff_exclusive", "hw_weekly", "failure_policy", "nonnegative_clipping", "tie_absolute_error_tolerance"]:
         if p[key] != old[key]:
             raise ValueError(f"Training-window protocol changed established rule: {key}")
@@ -154,7 +154,7 @@ def run():
     cfg = load_config()
     if cfg["horizon_days"] != 28 or cfg["clip_forecasts_at_zero"] is not True:
         raise ValueError("Configuration differs from frozen experiment")
-    cohort = json.loads((OUT/"robustness/split_manifest.json").read_text())
+    cohort = json.loads((OUT/"robustness/split_manifest.json").read_text(encoding="utf-8"))
     if cohort["selected_product_ids"] != protocol["selected_product_ids"]:
         raise ValueError("Robustness cohort differs from the committed protocol")
     protocol_commit = subprocess.check_output(["git", "log", "--diff-filter=A", "--format=%H", "--", "protocols/training_windows_v1.json"], cwd=ROOT, text=True).strip().splitlines()[0]
@@ -207,7 +207,7 @@ def run():
         "forecast_start_dates": protocol["forecast_start_dates"], "rows_per_method": len(protocol["selected_product_ids"])*6*28, "prediction_rows": len(predictions),
         "source_checksums": {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for folder in ["src", "sql", "protocols"] for p in (ROOT/folder).glob("*") if p.is_file()},
         "input_checksums": {f: hashlib.sha256((OUT/f).read_bytes()).hexdigest() for f in ["robustness/daily_sales.csv", "robustness/split_manifest.json", "robustness/predictions.csv"]},
-        "raw_sha256": json.loads((OUT/"sales/data_audit.json").read_text())["sha256"], "python": platform.python_version(),
+        "raw_sha256": json.loads((OUT/"sales/data_audit.json").read_text(encoding="utf-8"))["sha256"], "python": platform.python_version(),
         "packages": {p: importlib.metadata.version(p) for p in ["numpy", "pandas", "statsmodels", "scipy"]}, "duration_seconds": round(time.time()-started, 3), "limitations": protocol["limitations"]})
     print(overall[["model", "mae", "wape", "signed_bias"]].to_string(index=False), flush=True)
     return overall

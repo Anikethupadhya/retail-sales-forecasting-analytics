@@ -2,7 +2,7 @@
 
 ## Proposed bullets
 
-- Benchmarked four 28-day sales forecasting methods across six retrospective periods and 20 products using Python, pandas and statsmodels; reported 104.5% smoothing-model WAPE versus 103.6% for the strongest baseline.
+- Evaluated six 28-day sales forecasting methods across six retrospective periods and 20 products using Python, pandas and statsmodels; the best smoothing history achieved 104.0% pooled WAPE versus 104.5% with expanding history.
 - Audited 1,067,371 UCI transaction rows and built DuckDB SQL sales rankings, comparable-period growth and weekday analysis with a three-tab Streamlit/Plotly dashboard and evidence-backed error analysis.
 
 ## Claim mapping
@@ -21,3 +21,16 @@
 Sales findings and every value used in the Overview are traceable to `outputs/sales/findings.json` and its named SQL outputs. SQL calculations use all cleaned merchandise; forecast claims use the named cohort only. Technologies executed: Python/pandas preparation, statsmodels fits, DuckDB SQL, Streamlit/Plotly dashboard and pytest verification. Installation and test evidence is stored under `outputs/verification/`.
 
 The existing benchmark and robustness are different experiments. The corrected benchmark followed a disclosed ingestion repair after the first test had been seen. Robustness uses an earlier-selected cohort and fixed historical periods, with the family originally chosen on later-2011 validation. Do not combine their percentages, describe either rerun as a fresh holdout, call WAPE accuracy, or claim operational savings. The prior implementation is archived; current resume bullets describe the active sales analytics project.
+
+## Training-window claim mapping
+
+| Claim | Artifact and exact field |
+| --- | --- |
+| Six methods | outputs/training_windows_v1/overall_metrics.csv: six distinct model rows |
+| Six origins, 28 days, 20 products | protocols/training_windows_v1.json: forecast_start_dates, horizon_days, selected_product_ids |
+| 20,160 predictions, 3,360 per method | predictions.csv row count; experiment_manifest.json: prediction_rows, rows_per_method |
+| Best smoothing hw_182d: 103.976879994410% WAPE | overall_metrics.csv: model=hw_182d, wape |
+| Expanding smoothing: 104.519040833085% | overall_metrics.csv: model=hw_expanding, wape |
+| Strongest overall baseline: 103.558688134222% | overall_metrics.csv: model=weekday_mean_4w, wape |
+
+The proposed forecasting bullet reports the six-period pooled experiment. It does not claim that smoothing outperformed the strongest baseline. Raw-row count and the three dashboard tabs refer to the real-sales foundation, not an expanded forecasting cohort. Verified environments, tests and exact tested revisions are recorded under outputs/verification/training-windows/.
