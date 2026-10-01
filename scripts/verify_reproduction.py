@@ -132,6 +132,7 @@ def main():
         if manifest.exists():
             experiment = json.loads(manifest.read_text())
             assert experiment['implementation_revision']==revision
+            assert experiment['implementation_inputs_dirty_before_execution'] is False
             result['experiment_provenance'] = experiment
             assert experiment['protocol_sha256']==sha(workspace/'protocols/training_windows_v1.json')
         result.update(status='passed',reconciled_csv_files=reconciled,customer_free_parquet_reconciled=True,protected_artifacts_unchanged=True,duration_seconds=round(time.time()-started,2))

@@ -143,5 +143,3 @@ def test_transaction_value_is_aggregated_before_daily_totals():
     assert daily.positive_sales_gbp.iloc[0]==80
     assert daily.units.iloc[0]==5
     assert daily.transaction_lines.iloc[0]==2
-
-
