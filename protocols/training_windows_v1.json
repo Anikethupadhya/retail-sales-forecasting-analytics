@@ -1,0 +1,101 @@
+{
+  "experiment": "training_windows_v1",
+  "question": "Does limiting history improve weekly smoothing relative to expanding history?",
+  "forecast_start_dates": [
+    "2011-01-01",
+    "2011-03-01",
+    "2011-05-01",
+    "2011-07-01",
+    "2011-09-01",
+    "2011-11-01"
+  ],
+  "horizon_days": 28,
+  "selection_cutoff_exclusive": "2011-01-01",
+  "eligibility": {
+    "product_count": 20,
+    "min_initial_days": 365,
+    "max_first_sale_offset_days": 90,
+    "min_active_day_fraction": 0.25,
+    "min_recent_active_day_fraction": 0.3,
+    "recent_days": 90
+  },
+  "selected_product_ids": [
+    "21212",
+    "85123A",
+    "84077",
+    "85099B",
+    "17003",
+    "84879",
+    "84991",
+    "22197",
+    "21977",
+    "21232",
+    "21213",
+    "21982",
+    "21980",
+    "84755",
+    "84347",
+    "84992",
+    "21984",
+    "20725",
+    "21981",
+    "15036"
+  ],
+  "cohort_reference": "outputs/robustness/split_manifest.json",
+  "robustness_protocol_sha256": "32277d60050ee557cc4a99617034c3963f738eea2d776f74c952308e0857801f",
+  "smoothing_methods": {
+    "hw_expanding": null,
+    "hw_182d": 182,
+    "hw_365d": 365
+  },
+  "hw_weekly": {
+    "trend": null,
+    "seasonal": "add",
+    "seasonal_periods": 7,
+    "initialization_method": "estimated",
+    "optimized": true,
+    "use_brute": false
+  },
+  "baseline_history_days": {
+    "seasonal_naive": 7,
+    "weekday_mean_4w": 28,
+    "weekday_mean_8w": 56
+  },
+  "history_semantics": "F-W through F-1 inclusive, calendar zeros retained; expanding starts 2009-12-01; refit per origin; no within-horizon updates",
+  "expanding_start": "2009-12-01",
+  "nonnegative_clipping": true,
+  "failure_policy": "Model exception, nonfinite forecast or optimizer failure uses last-week seasonal-naive fallback; retain warnings, failed-fit status and clipping counts. Baseline calculation errors abort instead of concealing implementation errors.",
+  "warning_policy": "Warnings alone do not cause fallback; optimizer success=false causes fallback even without warning. Retain every warning.",
+  "primary_outcome": "Pooled WAPE across all six periods: limited smoothing versus hw_expanding",
+  "metrics": {
+    "mae": "mean(abs(prediction-actual))",
+    "pooled_wape": "100*sum(abs(prediction-actual))/sum(actual)",
+    "mean_product_wape": "Arithmetic mean of defined per-product WAPEs",
+    "signed_bias": "mean(prediction-actual); positive means overprediction",
+    "percentage_bias": "100*sum(prediction-actual)/sum(actual)",
+    "overall": "Pool all product-days across all six windows; never average window WAPE percentages.",
+    "zero_denominators": "Undefined WAPE and percentage bias are null; zero baseline WAPE gives undefined relative reduction.",
+    "product_wins": "Compare product absolute errors against each named baseline for products with positive actual total. Strictly lower beyond 1e-9 is a win; within 1e-9 is a tie. Report losses and undefined separately.",
+    "error_reduction_contribution": "Baseline absolute error minus model absolute error, retaining negative values."
+  },
+  "tie_absolute_error_tolerance": 1e-09,
+  "common_spike_rule": {
+    "percentile": 0.99,
+    "interpolation": "linear",
+    "history": "shared expanding product history strictly before each origin; include zeros",
+    "comparison": "actual strictly greater than threshold; same labels for all six methods; never excluded"
+  },
+  "coverage": "All selected products, six origins, 28 consecutive dates per method. Preflight calendars/history; structural errors abort; fallback stays in primary metrics.",
+  "reconciliation_tolerances": {
+    "relative": 1e-10,
+    "absolute": 1e-08
+  },
+  "limitations": [
+    "hw_weekly was selected using later-2011 validation; earlier windows are retrospective stress tests of that specification.",
+    "September and November windows overlap existing evaluations. Results are not independent confirmation or a fresh untouched holdout.",
+    "Compare methods within the same fixed cohort; cohort differences prevent attributing cross-experiment differences solely to models.",
+    "Observed positive sales do not reveal actual inventory or lost demand. No additional models or date changes after inspecting outcomes.",
+    "Six historical periods describe stability without statistical significance. No models, dates, eligibility or settings change after outcomes are inspected."
+  ],
+  "frozen_before_real_data_execution": true
+}

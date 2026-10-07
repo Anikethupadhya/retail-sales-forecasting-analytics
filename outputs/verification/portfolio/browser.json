@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "implementation_revision": "121930eb8981b586762a9029290cb3d8daa60a7d",
+  "source_checksums": {
+    "app.py": "27bd39bdde02ed5936ca3590ffc9d254066584483afb3a9f5ac1dee523521f27",
+    "scripts/capture_dashboard.cjs": "361b8044c5d709bab3fa9836dcd1b4736955f79a79b5ee53142209ec51821871",
+    "package.json": "9631975a7313c6e10e9cee6a8ba7f1ece422f25b24fe0ea7165a00a4fdb2438c",
+    "outputs/portfolio/summary.json": "9cf1753ffa9f87710b13d9fc92557187ffb87e794573272d8cc05d12625e5e26",
+    "outputs/portfolio/walkthrough_examples.json": "18ddbeaba3722026a44664006e66b5e8f444f71d071267d1bd38e63d278e7db5"
+  },
+  "url": "http://localhost:8502",
+  "screenshots": 9,
+  "screenshot_paths": [
+    "docs\\screenshots\\sales-overview.png",
+    "docs\\screenshots\\forecast-evaluation.png",
+    "docs\\screenshots\\forecast-robustness.png",
+    "docs\\screenshots\\forecast-training-windows.png",
+    "docs\\screenshots\\model-performance.png",
+    "docs\\screenshots\\training-window-diagnostics.png",
+    "docs\\screenshots\\walkthrough-improvement.png",
+    "docs\\screenshots\\walkthrough-deterioration.png",
+    "docs\\screenshots\\walkthrough-spike.png"
+  ],
+  "playwright_version": "1.62.1",
+  "browser_channel": "msedge",
+  "checks": [
+    "All-merchandise scope and source coverage",
+    "Existing corrected benchmark charts and product/cohort scope",
+    "Robustness experiment, November period and changed product",
+    "Training-window origin/product controls and all three saved smoothing curves",
+    "Manifest-driven improvement: 84077, 2011-11-01",
+    "Manifest-driven deterioration: 15036, 2011-07-01",
+    "Manifest-driven spike: 22197, 2011-05-01",
+    "Model comparison, period curves and signed product contributions",
+    "Rendered shared spike, product contribution and fit-record diagnostics",
+    "Rendered product error tables and spike chart"
+  ],
+  "page_errors": []
+}

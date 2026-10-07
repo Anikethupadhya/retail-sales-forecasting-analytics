@@ -1,0 +1,24 @@
+{
+  "total_count": 2,
+  "workflow_runs": [
+    {
+      "id": 37690605515,
+      "name": "Project checks",
+      "head_sha": "4e905f3949c6c876efb8bc43c52b53f9b0fc769a",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Anikethupadhya/retail-sales-forecasting-analytics/actions/runs/37690605515"
+    },
+    {
+      "id": 37690597794,
+      "name": "Project checks",
+      "head_sha": "4e905f3949c6c876efb8bc43c52b53f9b0fc769a",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Anikethupadhya/retail-sales-forecasting-analytics/actions/runs/37690597794"
+    }
+  ],
+  "observed_at_utc": "2026-10-07T21:39:01.856313+00:00"
+}

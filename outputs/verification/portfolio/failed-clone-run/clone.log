@@ -1,0 +1,9 @@
+Cloning into 'C:\Users\anike\Retail-Demand-Forcasting\.verification-runs\20261001T061002Z-cbd39bba\workspace'...
+fatal: detected dubious ownership in repository at 'C:\Users\anike\Retail-Demand-Forcasting/.git'
+'C:\Users\anike\Retail-Demand-Forcasting/.git' is owned by:
+	Aniketh_Laptop/CodexSandboxOffline (S-1-5-21-1825559633-3056160331-3322753229-1004)
+but the current user is:
+	ANIKETH_LAPTOP/anike (S-1-5-21-1825559633-3056160331-3322753229-1001)
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory 'C:\Users\anike\Retail-Demand-Forcasting/.git'

@@ -1,4 +1,5 @@
 {
+  "schema_version": 2,
   "scope": "All cleaned merchandise; 2009-12-01 through 2011-12-08; all countries",
   "findings": [
     {
@@ -6,21 +7,132 @@
       "text": "January\u2013November 2011 positive-sales value changed by +2.90% versus the same months in 2010; units changed by -6.00%.",
       "source": "outputs/sales/comparable_growth.csv",
       "row": "year=2011",
-      "value": 2.896081910134423
+      "value": 2.896081910134423,
+      "values": {
+        "positive_sales_gbp": 8877678.989999998,
+        "previous_value": 8627810.529999996,
+        "positive_units": 4904971.0,
+        "previous_units": 5217965.0,
+        "value_growth_pct": 2.896081910134423,
+        "units_growth_pct": -5.998392093469389
+      },
+      "formula": "100 \u00d7 (current / previous \u2212 1), calculated separately for value and units",
+      "units": {
+        "positive_sales_gbp": "GBP",
+        "positive_units": "units",
+        "growth": "%"
+      },
+      "numerator": {
+        "value": "positive_sales_gbp \u2212 previous_value",
+        "units": "positive_units \u2212 previous_units"
+      },
+      "denominator": {
+        "value": "previous_value",
+        "units": "previous_units"
+      },
+      "comparison_periods": {
+        "current": "2011-01-01 through 2011-11-30",
+        "previous": "2010-01-01 through 2010-11-30"
+      },
+      "sql": "sql/comparable_growth.sql",
+      "limitations": "Matched complete January\u2013November periods; value and unit changes do not establish price, mix, or causal explanations.",
+      "population": "All cleaned positive merchandise sales; all countries",
+      "date_range": {
+        "start": "2009-12-01",
+        "end": "2011-12-08"
+      },
+      "display": {
+        "GBP_decimals": 2,
+        "percentage_decimals": 2,
+        "count_decimals": 0
+      },
+      "value_basis": "Transaction-level Quantity \u00d7 Price, summed before aggregation; returns excluded",
+      "source_fields": [
+        "positive_sales_gbp",
+        "previous_value",
+        "positive_units",
+        "previous_units",
+        "value_growth_pct",
+        "units_growth_pct"
+      ]
     },
     {
       "id": "value_leader",
       "text": "22423 (REGENCY CAKESTAND 3 TIER) led positive-sales value at \u00a3330,757.09, accounting for 1.70% of the all-merchandise total.",
       "source": "outputs/sales/product_rankings.csv",
       "row": "product_id=22423",
-      "value": 330757.09000000043
+      "value": 330757.09000000043,
+      "values": {
+        "positive_sales_gbp": 330757.09000000043,
+        "all_merchandise_positive_sales_gbp": 19501670.71,
+        "value_share_pct": 1.6960448923506632
+      },
+      "product_id": "22423",
+      "description": "REGENCY CAKESTAND 3 TIER",
+      "formula": "sum(transaction Quantity \u00d7 Price); share = 100 \u00d7 product value / all-merchandise value",
+      "units": {
+        "positive_sales_gbp": "GBP",
+        "value_share_pct": "%"
+      },
+      "numerator": "Product positive_sales_gbp",
+      "denominator": "All-merchandise positive_sales_gbp",
+      "sql": "sql/product_rankings.sql",
+      "limitations": "Ranking is by observed positive-sales value across the extract, not profit, net revenue, or customer preference.",
+      "population": "All cleaned positive merchandise sales; all countries",
+      "date_range": {
+        "start": "2009-12-01",
+        "end": "2011-12-08"
+      },
+      "display": {
+        "GBP_decimals": 2,
+        "percentage_decimals": 2,
+        "count_decimals": 0
+      },
+      "value_basis": "Transaction-level Quantity \u00d7 Price, summed before aggregation; returns excluded",
+      "source_fields": [
+        "positive_sales_gbp",
+        "value_share_pct"
+      ],
+      "denominator_source": "outputs/sales/data_audit.json:positive_sales_gbp"
     },
     {
       "id": "weekday_pattern",
       "text": "Thursday had the highest average daily positive-sales value: \u00a337,923.16 over 106 covered calendar days, including zero-sales dates.",
       "source": "outputs/sales/weekday_seasonality.csv",
       "row": "weekday=Thursday",
-      "value": 37923.15811320754
+      "value": 37923.15811320754,
+      "values": {
+        "positive_sales_gbp": 4019854.759999999,
+        "covered_calendar_days": 106,
+        "average_daily_sales_gbp": 37923.15811320754
+      },
+      "weekday": "Thursday",
+      "formula": "weekday positive_sales_gbp / covered_calendar_days, including zero-sale dates",
+      "units": {
+        "positive_sales_gbp": "GBP",
+        "covered_calendar_days": "days",
+        "average_daily_sales_gbp": "GBP/calendar day"
+      },
+      "numerator": "weekday positive_sales_gbp",
+      "denominator": "covered_calendar_days",
+      "sql": "sql/weekday_seasonality.sql",
+      "limitations": "Covered calendar days include zeros; zero observations cannot distinguish closure, missing records, or stock-outs.",
+      "population": "All cleaned positive merchandise sales; all countries",
+      "date_range": {
+        "start": "2009-12-01",
+        "end": "2011-12-08"
+      },
+      "display": {
+        "GBP_decimals": 2,
+        "percentage_decimals": 2,
+        "count_decimals": 0
+      },
+      "value_basis": "Transaction-level Quantity \u00d7 Price, summed before aggregation; returns excluded",
+      "source_fields": [
+        "positive_sales_gbp",
+        "covered_calendar_days",
+        "average_daily_sales_gbp"
+      ]
     }
   ]
 }

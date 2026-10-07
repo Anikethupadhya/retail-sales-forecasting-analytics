@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "rows": 13440,
+  "methods": [
+    "hw_expanding",
+    "seasonal_naive",
+    "weekday_mean_4w",
+    "weekday_mean_8w"
+  ],
+  "relative_tolerance": 1e-10,
+  "absolute_tolerance": 1e-08,
+  "statuses_equal": true
+}

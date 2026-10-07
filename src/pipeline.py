@@ -24,9 +24,9 @@ def main():
     archive_count = verify_archives()
     protocol_path = ROOT / cfg["robustness_protocol"]
     protocol_hash = hashlib.sha256(protocol_path.read_bytes()).hexdigest()
-    if protocol_hash != protocol_path.with_suffix(".sha256").read_text().strip():
+    if protocol_hash != protocol_path.with_suffix(".sha256").read_text(encoding="utf-8").strip():
         raise ValueError("Frozen protocol checksum mismatch")
-    protocol = json.loads(protocol_path.read_text())
+    protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
     if any(cfg[k] != v for k, v in protocol["eligibility"].items()) or cfg["models"] != protocol["models"]:
         raise ValueError("Config differs from frozen protocol")
     if cfg["horizon_days"] != protocol["horizon_days"] or cfg["clip_forecasts_at_zero"] != protocol["nonnegative_clipping"]:
@@ -44,7 +44,7 @@ def main():
     daily = daily_grid(sales, selected, calendar.date.min(), calendar.date.max())
     daily.to_csv(robust / "daily_sales.csv", index=False)
     splits = make_robustness_splits(protocol, calendar.date.min(), calendar.date.max())
-    old = json.loads((BENCHMARK / "split_manifest.json").read_text())["selected_product_ids"]
+    old = json.loads((BENCHMARK / "split_manifest.json").read_text(encoding="utf-8"))["selected_product_ids"]
     manifest = {"experiment": protocol["experiment"], "protocol_sha256": protocol_hash,
                 "selection_cutoff_exclusive": protocol["selection_cutoff_exclusive"], "selected_product_ids": selected,
                 "criteria": protocol["eligibility"], "ranking": protocol["ranking"], "splits": splits,
@@ -73,6 +73,8 @@ def main():
               "raw_sha256": audit["sha256"], "config_sha256": hashlib.sha256((ROOT / "config.json").read_bytes()).hexdigest(),
               "protocol_sha256": protocol_hash, "historical_archive_files_verified": archive_count,
               "duration_seconds": round(time.time()-started, 2)})
+    from .training_windows import run as run_training_windows
+    run_training_windows()
     from .report import generate
     generate()
     print(overall.to_string(index=False), flush=True)

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment": "training_windows_v1",
+  "best_method": "weekday_mean_4w",
+  "candidate": "weekday_mean_4w",
+  "comparator": "seasonal_naive",
+  "candidate_wape": 103.55868813422221,
+  "comparator_wape": 110.41658145992102,
+  "candidate_absolute_error_units": 227884.0,
+  "comparator_absolute_error_units": 242975.0,
+  "actual_units_per_method": 220053.0,
+  "relative_error_reduction_pct": 6.210927050108036,
+  "wape_difference_percentage_points": 6.857893325698811,
+  "methods": 6,
+  "products": 20,
+  "periods": 6,
+  "horizon_days": 28,
+  "prediction_rows": 20160,
+  "raw_rows": 1067371,
+  "retained_lines": 1013327,
+  "all_merchandise_products": 4706,
+  "formula": "100 \u00d7 (comparator absolute_error_sum \u2212 candidate absolute_error_sum) / comparator absolute_error_sum",
+  "sources": {
+    "metrics": "outputs/training_windows_v1/overall_metrics.csv",
+    "support": "outputs/training_windows_v1/predictions.csv",
+    "cohort": "outputs/robustness/split_manifest.json",
+    "audit": "outputs/sales/data_audit.json"
+  },
+  "scope": "20 pre-January-2011 products; six retrospective 28-day periods; identical observations; observed positive units",
+  "limitations": "Lowest pooled error among tested methods only. Later-2011 family selection and overlapping inspected evaluations; no independent holdout or significance claim. WAPE remains substantial."
+}

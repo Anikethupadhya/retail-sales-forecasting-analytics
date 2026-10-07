@@ -1,4 +1,9 @@
-# Corrected benchmark error analysis
+# Forecast error analysis
+
+Generated benchmark and training-window sections below preserve their separate scopes.
+
+<!-- generated:benchmark-error-analysis:start -->
+## Corrected benchmark error analysis
 
 Scope: the preserved 20-product benchmark, 2011-11-11 through 2011-12-08; 560 product-days per method. Inputs are immutable saved predictions, not newly tuned fits.
 
@@ -51,3 +56,12 @@ Define a spike as observed daily units **strictly above the product's training-h
 The largest observed daily test sale was 3,111 units for 22197 (POPCORN HOLDER) on 2011-12-08. [Interactive example](figures/benchmark-spike-example.html) compares its actual and both forecast series. The spike/error associations are observed patterns. Wholesale orders, promotions or stock availability are possible explanations that these aggregate data do not establish.
 
 Saved calculations: `daily_errors.csv`, `spike_thresholds.csv`, `spike_summary.csv`, `largest_improvements.csv`, `largest_deteriorations.csv` and `reconciliation.json` in `outputs/benchmark_analysis/`.
+<!-- generated:benchmark-error-analysis:end -->
+
+<!-- generated:training-window-diagnostics:start -->
+## Training-window diagnostics
+
+The best observed smoothing history was `hw_182d` at **103.976880% pooled WAPE**, versus **104.519041%** with expanding history. This is a **0.518720% relative reduction** (0.542161 percentage points), winning in **2/6 periods** and **9/20 products** across combined periods. The strongest baseline remains `weekday_mean_4w` at **103.558688%**, below every smoothing variant. A shorter history produced a small pooled improvement, with mixed period/product results; it does not establish a generally superior model.
+
+[Full window analysis](training-window-experiment.md) includes shared spike labels, high-volume contributions, signed bias and fit status. Historical benchmark diagnostics retain their original threshold and scope.
+<!-- generated:training-window-diagnostics:end -->

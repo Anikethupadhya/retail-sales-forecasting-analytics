@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "selection_context": "Illustrations selected after inspecting saved results; not validation or evidence of representative performance.",
+  "missing_example_types": [],
+  "examples": [
+    {
+      "id": "improvement",
+      "selection_rule": "Greatest six-period absolute-error reduction; product-ID ascending tie-break. Display period uses the same extremum, then earliest start.",
+      "product_id": "84077",
+      "forecast_start": "2011-11-01",
+      "actual_units_six_periods": 19761.0,
+      "candidate_error_six_periods": 24526.5,
+      "comparator_error_six_periods": 41239.0,
+      "error_reduction_units": 16712.5,
+      "candidate_wape_six_periods": 124.1156824047366,
+      "comparator_wape_six_periods": 208.68883153686554,
+      "period_error_reduction_units": 15090.0,
+      "interpretation": "A product-specific example; the selected chart period is distinct from the six-period product score.",
+      "experiment": "training_windows_v1",
+      "candidate": "weekday_mean_4w",
+      "comparator": "seasonal_naive",
+      "description": "WORLD WAR 2 GLIDERS ASSTD DESIGNS",
+      "sources": {
+        "predictions": "outputs/training_windows_v1/predictions.csv",
+        "fields": [
+          "product_id",
+          "forecast_start",
+          "date",
+          "model",
+          "actual",
+          "prediction",
+          "spike_threshold",
+          "is_spike"
+        ],
+        "description": "outputs/robustness/product_metadata.csv"
+      },
+      "selectors": {
+        "Evaluation experiment": "Training-window experiment",
+        "Forecast start": "2011-11-01",
+        "Product": "84077",
+        "Smoothing histories": [],
+        "Baseline comparisons": [
+          "weekday_mean_4w",
+          "seasonal_naive"
+        ]
+      }
+    },
+    {
+      "id": "deterioration",
+      "selection_rule": "Most negative six-period absolute-error reduction; product-ID ascending tie-break. Display period uses the same extremum, then earliest start.",
+      "product_id": "15036",
+      "forecast_start": "2011-07-01",
+      "actual_units_six_periods": 10796.0,
+      "candidate_error_six_periods": 14028.5,
+      "comparator_error_six_periods": 10752.0,
+      "error_reduction_units": -3276.5,
+      "candidate_wape_six_periods": 129.9416450537236,
+      "comparator_wape_six_periods": 99.59244164505373,
+      "period_error_reduction_units": -2069.0,
+      "interpretation": "A product-specific example; the selected chart period is distinct from the six-period product score.",
+      "experiment": "training_windows_v1",
+      "candidate": "weekday_mean_4w",
+      "comparator": "seasonal_naive",
+      "description": "ASSORTED COLOURS SILK FAN",
+      "sources": {
+        "predictions": "outputs/training_windows_v1/predictions.csv",
+        "fields": [
+          "product_id",
+          "forecast_start",
+          "date",
+          "model",
+          "actual",
+          "prediction",
+          "spike_threshold",
+          "is_spike"
+        ],
+        "description": "outputs/robustness/product_metadata.csv"
+      },
+      "selectors": {
+        "Evaluation experiment": "Training-window experiment",
+        "Forecast start": "2011-07-01",
+        "Product": "15036",
+        "Smoothing histories": [],
+        "Baseline comparisons": [
+          "weekday_mean_4w",
+          "seasonal_naive"
+        ]
+      }
+    },
+    {
+      "id": "spike",
+      "selection_rule": "Largest actual-minus-existing shared threshold; product-ID then date ascending ties.",
+      "product_id": "22197",
+      "forecast_start": "2011-05-01",
+      "date": "2011-05-27",
+      "actual_units": 4314.0,
+      "spike_threshold": 1200.8000000000038,
+      "excess_units": 3113.199999999996,
+      "interpretation": "Large observed sales against a strictly preorigin 99th-percentile threshold; cause is unknown and the observation remains in primary scores.",
+      "experiment": "training_windows_v1",
+      "candidate": "weekday_mean_4w",
+      "comparator": "seasonal_naive",
+      "description": "SMALL POPCORN HOLDER",
+      "sources": {
+        "predictions": "outputs/training_windows_v1/predictions.csv",
+        "fields": [
+          "product_id",
+          "forecast_start",
+          "date",
+          "model",
+          "actual",
+          "prediction",
+          "spike_threshold",
+          "is_spike"
+        ],
+        "description": "outputs/robustness/product_metadata.csv"
+      },
+      "selectors": {
+        "Evaluation experiment": "Training-window experiment",
+        "Forecast start": "2011-05-01",
+        "Product": "22197",
+        "Smoothing histories": [],
+        "Baseline comparisons": [
+          "weekday_mean_4w",
+          "seasonal_naive"
+        ]
+      }
+    }
+  ]
+}
