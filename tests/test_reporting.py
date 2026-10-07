@@ -43,6 +43,9 @@ def test_reports_preserve_prose_repeat_and_update_changed_input(tmp_path, monkey
     readme = (root/"README.md").read_text(encoding="utf-8")
     for key in ["headline","sales-findings","forecast-results"]:
         assert readme.count(f"generated:{key}:start") == readme.count(f"generated:{key}:end") == 1
+    assert (root/"docs/result-evidence.md").exists()
+    assert not (root/"docs/resume-evidence.md").exists()
+    assert not (root/"docs/interview-guide.md").exists()
     rankings = pd.read_csv(outputs/"sales/product_rankings.csv",dtype={"product_id":str})
     leader = rankings.sort_values(["value_rank","product_id"]).index[0]
     rankings.loc[leader,"positive_sales_gbp"] += 1234
@@ -110,7 +113,7 @@ def test_walkthrough_scores_and_rules_match_saved_predictions():
 
 @pytest.mark.integration
 def test_portfolio_local_links_and_generated_claims():
-    paths = [ROOT/"README.md"]+[ROOT/"docs"/n for n in ["report-ownership.md","business-findings.md","dashboard-walkthrough.md","interview-guide.md","resume-evidence.md","review-and-merge.md"]]
+    paths = [ROOT/"README.md"]+[ROOT/"docs"/n for n in ["report-ownership.md","business-findings.md","dashboard-walkthrough.md","result-evidence.md","verification.md","setup-and-reproduction.md"]]
     for path in paths:
         text = path.read_text(encoding="utf-8")
         assert not re.search(r"[A-Z]:[\\/]Users[\\/]",text)
@@ -119,10 +122,12 @@ def test_portfolio_local_links_and_generated_claims():
                 continue
             assert (path.parent/destination.split("#")[0]).exists(), (path.name,destination)
     s = build_summary()
-    for path in [ROOT/"README.md",ROOT/"docs/resume-evidence.md",ROOT/"docs/interview-guide.md"]:
+    for path in [ROOT/"README.md",ROOT/"docs/result-evidence.md"]:
         text = path.read_text(encoding="utf-8")
         assert f"{s['relative_error_reduction_pct']:.1f}%" in text
         assert "later-2011" in text.lower() and "last-week" in text.lower()
+    readme = (ROOT/"README.md").read_text(encoding="utf-8").lower()
+    assert not re.search(r"resume|résumé|recruiter|interview|draft pr|currently private",readme)
 
 
 @pytest.mark.parametrize("change",["modified","added"])

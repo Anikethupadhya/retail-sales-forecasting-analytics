@@ -51,12 +51,11 @@ The **four-week weekday-average baseline** had the lowest pooled error among the
 
 ## Quick dashboard demonstration
 
-The repository includes customer-free aggregates and saved forecasts. After installation, the dashboard runs without the raw workbook, an existing DuckDB database, or model fitting. The repository is currently private, so cloning requires access. While the draft PR is unmerged, switch to its feature branch:
+The repository includes customer-free aggregates and saved forecasts. After installation, the dashboard runs without the raw workbook, an existing DuckDB database, or model fitting. Clone the repository, install the pinned dependencies, and launch the dashboard:
 
 ```powershell
 git clone https://github.com/Anikethupadhya/retail-sales-forecasting-analytics.git
 cd retail-sales-forecasting-analytics
-git switch feature/reproducible-training-windows
 python -m venv .venv
 .\.venv\Scripts\python -m pip install -r requirements.txt
 .\.venv\Scripts\python -m pip check
@@ -81,7 +80,7 @@ Full analysis audits the official workbook and reruns the existing frozen compar
 .\.venv\Scripts\python scripts/verify_reproduction.py --revision HEAD
 ```
 
-See [setup and reproduction](docs/setup-and-reproduction.md) for workbook acquisition, checksums, environment requirements, and verification scope. The review ZIP is an inspection package; full execution uses a Git checkout so protocol history can be verified.
+See [setup and reproduction](docs/setup-and-reproduction.md) for workbook acquisition, checksums, environment requirements, and verification scope. Full execution uses a Git checkout so the committed experiment protocol and its history can be verified.
 
 ## Important limitations
 
@@ -96,5 +95,5 @@ Source: [Chen, D. (2012), Online Retail II, UCI](https://archive.ics.uci.edu/dat
 - [Business findings and SQL](docs/business-findings.md)
 - [Training-window experiment](docs/training-window-experiment.md) and [error analysis](docs/error-analysis.md)
 - [Report ownership](docs/report-ownership.md)
-- [Interview guide](docs/interview-guide.md) and [resume evidence](docs/resume-evidence.md)
-- [Review and merge instructions](docs/review-and-merge.md)
+- [Result sources and metric definitions](docs/result-evidence.md)
+- [Verification methods and recorded runs](docs/verification.md)

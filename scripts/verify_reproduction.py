@@ -99,7 +99,7 @@ def main():
         assert not result['checkout_initial_status'], 'Initial checkout must be clean'
         result['source_checksums'] = {p.relative_to(workspace).as_posix():sha(p) for folder in ['src','sql','tests','scripts','protocols','.github'] for p in (workspace/folder).rglob('*') if p.is_file()}
         result['source_checksums'].update({n:sha(workspace/n) for n in ['app.py','config.json','requirements.txt','.gitattributes','pytest.ini','package.json'] if (workspace/n).exists()})
-        documentation_paths=['README.md','docs/business-findings.md','docs/dashboard-walkthrough.md','docs/interview-guide.md','docs/resume-evidence.md','docs/error-analysis.md','docs/training-window-experiment.md']
+        documentation_paths=['README.md','docs/business-findings.md','docs/dashboard-walkthrough.md','docs/result-evidence.md','docs/error-analysis.md','docs/training-window-experiment.md']
         def maintained(path):
             text=(workspace/path).read_text(encoding='utf-8')
             starts=re.findall(r'<!-- generated:([^:]+):start -->',text)

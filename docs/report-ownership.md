@@ -2,7 +2,7 @@
 
 Prose outside `<!-- generated:NAME:start -->` / `<!-- generated:NAME:end -->` is maintained content. Reporting replaces only the matching bounded section. Each key must occur once; duplicate, incomplete or reversed boundaries are errors rather than permission to erase a document.
 
-The maintained README owns its introduction, method explanation, setup commands, limitations and navigation. `src.portfolio` owns its headline, sales-findings and forecast-results sections. It also owns bounded sections in business findings, walkthrough, resume evidence and interview guidance. `src.report` owns corrected benchmark error analysis and deterministic HTML figures. `src.training_report` owns the training-window report and its error-analysis summary; it never rewrites the README or appends duplicate sections.
+The maintained README owns its introduction, method explanation, setup commands, limitations and navigation. `src.portfolio` owns its headline, sales-findings and forecast-results sections. It also owns bounded sections in business findings, walkthrough and result evidence. `src.report` owns corrected benchmark error analysis and deterministic HTML figures. `src.training_report` owns the training-window report and its error-analysis summary; it never rewrites the README or appends duplicate sections.
 
 The canonical command is:
 

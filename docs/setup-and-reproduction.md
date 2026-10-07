@@ -2,12 +2,11 @@
 
 Run full analysis from a Git clone with its commit history; the review ZIP is an inspection copy and deliberately excludes .git. The experiment validates its previously committed protocol before real-data execution.
 
-While the draft is unmerged, a new GitHub clone starts on main. Switch to the reviewed feature branch to use this implementation:
+Clone the repository and use its default main branch:
 
 ```powershell
 git clone https://github.com/Anikethupadhya/retail-sales-forecasting-analytics.git
 cd retail-sales-forecasting-analytics
-git switch feature/reproducible-training-windows
 ```
 
 Use Python 3.14.3, the runtime recorded in the measured manifests. All Python dependencies remain pinned in requirements.txt; no broad upgrade was introduced.

@@ -1,4 +1,4 @@
-name: Portfolio checks
+name: Project checks
 on:
   push:
   pull_request:
