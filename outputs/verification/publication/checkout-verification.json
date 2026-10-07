@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "tested_implementation_commit": "4e905f3949c6c876efb8bc43c52b53f9b0fc769a",
+  "verification_scope": "Clean checkout, committed saved outputs, report-only regeneration and complete routine checks. No raw-data rebuild; existing pinned local dependency environment reused. CI independently installs dependencies.",
+  "environment_reused": true,
+  "full_raw_data_reproduction": false,
+  "commands": [
+    {
+      "label": "clone",
+      "exit_status": 0
+    },
+    {
+      "label": "checkout",
+      "exit_status": 0
+    },
+    {
+      "label": "quick-demo",
+      "exit_status": 0
+    },
+    {
+      "label": "report-first",
+      "exit_status": 0
+    },
+    {
+      "label": "report-second",
+      "exit_status": 0
+    },
+    {
+      "label": "checkout-tests",
+      "exit_status": 0
+    }
+  ],
+  "checkout_initially_clean": true,
+  "python_version": "3.14.3",
+  "report_regeneration_stable": true,
+  "deterministic_document_count": 12,
+  "public_career_material_absent_after_regeneration": true,
+  "unchanged_numerical_and_protected_artifacts": 89,
+  "tests": {
+    "tests": 49,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "observed_at_utc": "2026-10-07T21:39:30.436605+00:00"
+}
